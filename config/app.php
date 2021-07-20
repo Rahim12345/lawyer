@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'az',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Yoeunes\Toastr\ToastrServiceProvider::class,
 
         /*
          * Application Service Providers...

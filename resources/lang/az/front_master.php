@@ -1,0 +1,26 @@
+<?php
+return [
+    'get_free_advice'  => 'PULSUZ MƏSLƏHƏT AL',
+    'home'=>'Əsas səhifə',
+    'home_upper'=>'ƏSAS SƏHİFƏ',
+    'all_rights_reserved'=>'Bütün hüquqlar qorunur',
+    'book_an_appointment'=>'GÖRÜŞ TƏYİN EDİN',
+    'about'=>'Haqqında',
+    'services'=>'Xidmətlər',
+    'attorneys'=>'Vəkillər',
+    'news'=>'Xəbərlər',
+    'contact'=>'Əlaqə',
+    'type_here_to_search'=>'Axtar',
+    'send_us_a_message'=>'Mesaj göndər',
+    'your_name'=>'Adınız',
+    'subject'=>'Mövzu',
+    'message'=>'Mesaj',
+    'send_message'=>'Mesaj göndər',
+    'most_successful_Law_firm'=>'Ən Uğurlu Hüquq Firması',
+    'contact_us'=>'BİZİMLƏ ƏLAQƏ',
+    'helpline'=>'Qaynar xətt',
+    'phone'=>'Telefon',
+    'join_our_list_to_stay_in_touch'=>'ƏLAQƏ SAXLAMAQ ÜÇÜN ABUNƏ OLUN',
+    'subscribe'=>'Abunə ol',
+    'we_ll_never_share_your_email_with_anyone_else'=>'E-poçtunuzu heç vaxt başqası ilə bölüşməyəcəyik.'
+];
