@@ -9,5 +9,8 @@ return [
     'save'=>'Yadda saxla',
     'update'=>'Redaktə et',
     'notifications'=>'Bildirişlər',
-    'subscribers'=>'Abunələr'
+    'subscribers'=>'Abunələr',
+    'attorneys'=>'Vəkillər',
+    'add'=>'Əlavə et',
+    'all'=>'Bütün'
 ];

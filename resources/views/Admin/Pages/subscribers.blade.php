@@ -18,21 +18,6 @@
                         <!-- Page pre-title -->
                         <div class="page-pretitle">
                             Subscribes
-                            <div class="mb-3 col-xl-4 col-md-3 float-end">
-                                <div class="input-group">
-                                    <div class="dropdown-menu dropdown-menu-end" id="subscriberDropdown">
-                                        <a class="dropdown-item" href="javascript:void(0)" wire:click = "all">
-                                            All
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:void(0)" wire:click = "verified">
-                                            Verified
-                                        </a>
-                                        <a class="dropdown-item" href="javascript:void(0)" wire:click = "non_verified">
-                                            Non-verified
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <h2 class="page-title">
                             All subscribes

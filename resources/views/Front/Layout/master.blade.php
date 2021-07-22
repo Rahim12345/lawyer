@@ -86,7 +86,7 @@
                         </li>
 
                         <li>
-                            <a href="#">{{ __('front_master.attorneys') }}</a>
+                            <a href="{{ route('front.attorneys') }}">{{ __('front_master.attorneys') }}</a>
                         </li>
                         <li>
                             <a href="#">{{ __('front_master.news') }}</a>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\notificationsController;
 use App\Http\Controllers\Admin\subsciberController;
+use App\Http\Controllers\Admin\vekilController;
 use App\Http\Controllers\Auth\loginController;
 use App\Http\Controllers\Front\contactController;
 use App\Http\Controllers\Front\homeController;
@@ -31,6 +32,9 @@ Route::post('subscribe', [ contactController::class,'subscribe'] )
 Route::post('contact-submittion', [ contactController::class,'sendEmail'] )
     ->name('front.contact.store');
 
+Route::get('attorneys', [ vekilController::class,'vekiller'] )
+    ->name('front.attorneys');
+
 
 Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
     Route::get('dashboard', [ dashboardController::class,'index'] )
@@ -50,4 +54,22 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
 
     Route::get('subscribers',[subsciberController::class,'index'])
         ->name('admin.subscribers');
+
+    Route::get('vekiller',[vekilController::class,'index'])
+        ->name('admin.vekiller.index');
+
+    Route::get('vekiller-add',[vekilController::class,'create'])
+        ->name('admin.vekiller.create');
+
+    Route::post('vekiller-store',[vekilController::class,'store'])
+        ->name('admin.vekiller.store');
+
+    Route::post('vekiller-delete',[vekilController::class,'delete'])
+        ->name('admin.vekiller.delete');
+
+    Route::get('vekiller/{id}',[vekilController::class,'edit'])
+        ->name('admin.vekiller.edit');
+
+    Route::post('vekiller-update',[vekilController::class,'update'])
+        ->name('admin.vekiller.update');
 });

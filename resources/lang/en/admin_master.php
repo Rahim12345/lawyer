@@ -9,5 +9,8 @@ return [
     'save'=>'Save',
     'update'=>'Update',
     'notifications'=>'Notifications',
-    'subscribers'=>'Subscribers'
+    'subscribers'=>'Subscribers',
+    'attorneys'=>'Attorneys',
+    'add'=>'Add',
+    'all'=>'All'
 ];
