@@ -22,6 +22,10 @@ return [
     'phone'=>'Phone',
     'join_our_list_to_stay_in_touch'=>'Join Our List To Stay In Touch',
     'subscribe'=>'Subscribe',
-    'we_ll_never_share_your_email_with_anyone_else'=>'We\'ll never share your email with anyone else.'
+    'we_ll_never_share_your_email_with_anyone_else'=>'We\'ll never share your email with anyone else.',
+    'need_an_advice'=>'Need an Advice from Expert Lawyers?',
+    'get_appointment'=>'Get an Appointment Today!',
+    'quick_help'=>'Call us for a quick help!',
+    'live_support'=>'live support'
 
 ];

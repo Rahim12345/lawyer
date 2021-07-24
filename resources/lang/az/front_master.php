@@ -22,5 +22,9 @@ return [
     'phone'=>'Telefon',
     'join_our_list_to_stay_in_touch'=>'ƏLAQƏ SAXLAMAQ ÜÇÜN ABUNƏ OLUN',
     'subscribe'=>'Abunə ol',
-    'we_ll_never_share_your_email_with_anyone_else'=>'E-poçtunuzu heç vaxt başqası ilə bölüşməyəcəyik.'
+    'we_ll_never_share_your_email_with_anyone_else'=>'E-poçtunuzu heç vaxt başqası ilə bölüşməyəcəyik.',
+    'need_an_advice'=>'Mütəxəssis Hüquqşünaslardan bir tövsiyəyə ehtiyacınız var?',
+    'get_appointment'=>'Bu gün randevu alın!',
+    'quick_help'=>'Zəng edin',
+    'live_support'=>'canlı dəstək'
 ];

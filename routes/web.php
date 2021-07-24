@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\notificationsController;
 use App\Http\Controllers\Admin\subsciberController;
 use App\Http\Controllers\Admin\vekilController;
 use App\Http\Controllers\Auth\loginController;
+use App\Http\Controllers\Front\aboutController;
 use App\Http\Controllers\Front\contactController;
 use App\Http\Controllers\Front\homeController;
 use App\Http\Controllers\settingController;
@@ -34,6 +35,9 @@ Route::post('contact-submittion', [ contactController::class,'sendEmail'] )
 
 Route::get('attorneys', [ vekilController::class,'vekiller'] )
     ->name('front.attorneys');
+
+Route::get('about', [ aboutController::class,'index'] )
+    ->name('front.about');
 
 
 Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){

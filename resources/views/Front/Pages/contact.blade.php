@@ -15,6 +15,7 @@
             <h2 class="inner-banner__title">{{ __('front_master.contact_us') }}</h2><!-- /.inner-banner__title -->
             <ul class="list-unstyled thm-breadcrumb">
                 <li><a href="{{ route('front.home') }}">{{ __('front_master.home_upper') }}</a></li>
+                <li>{{ __('front_master.contact') }}</li>
             </ul><!-- /.thm-breadcrumb -->
         </div><!-- /.container -->
     </section><!-- /.inner-banner -->

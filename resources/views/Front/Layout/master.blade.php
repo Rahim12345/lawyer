@@ -78,7 +78,7 @@
                             <a href="{{ route('front.home') }}">{{ __('front_master.home') }}</a>
                         </li>
                         <li >
-                            <a href="#">{{ __('front_master.about') }}</a>
+                            <a href="{{ route('front.about') }}">{{ __('front_master.about') }}</a>
                         </li>
 
                         <li>
