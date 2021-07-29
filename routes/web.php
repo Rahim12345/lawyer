@@ -82,3 +82,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
 
     Route::resource('about',\App\Http\Controllers\Admin\aboutController::class);
 });
+
+Route::get('/{lang}',[ homeController::class,'lang' ])
+    ->name('front.lang');

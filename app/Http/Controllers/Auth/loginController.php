@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\loginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 
 class loginController extends Controller
@@ -13,12 +14,14 @@ class loginController extends Controller
     // Login səhifəsinə girəndə view nu göstərdim
     public function login ()
     {
+        App::setLocale(Cookie::get('lang'));
         return view( 'Auth.login' );
     }
 
     // Login etmək üçün control etdim
     public function loginPost ( loginRequest $request )
     {
+        App::setLocale(Cookie::get('lang'));
         request()->flash();
         $user = User::where( 'email', '=', $request->email )->first();
 
@@ -76,6 +79,7 @@ class loginController extends Controller
     //Logout edirəm
     public function logout ( Request $request )
     {
+        App::setLocale(Cookie::get('lang'));
         auth()->logout();
 
         return redirect()->route( 'login' );

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Attorney;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 
@@ -12,6 +14,7 @@ class vekilController extends Controller
 {
     public function index()
     {
+        App::setLocale(Cookie::get('lang'));
         return view('Admin.Pages.attorneys',[
             'attorneys'=>Attorney::all()
         ]);
@@ -19,11 +22,13 @@ class vekilController extends Controller
 
     public function create()
     {
+        App::setLocale(Cookie::get('lang'));
         return view('Admin.Pages.new-attorney');
     }
 
     public function store(Request $request)
     {
+        App::setLocale(Cookie::get('lang'));
         $this->validate($request,[
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:3072|dimensions:width=285,height=300',
             'name' => 'required|max:50',
@@ -62,6 +67,7 @@ class vekilController extends Controller
 
     public function delete(Request $request)
     {
+        App::setLocale(Cookie::get('lang'));
         $this->validate($request,[
             'id'=>['required',Rule::in(Attorney::get()->pluck('id')->toArray())]
         ]);
@@ -80,6 +86,7 @@ class vekilController extends Controller
 
     public function edit($id)
     {
+        App::setLocale(Cookie::get('lang'));
         $attorney = Attorney::whereId($id)->first();
 
         if ($attorney === null)
@@ -94,6 +101,7 @@ class vekilController extends Controller
 
     public function update(Request $request)
     {
+        App::setLocale(Cookie::get('lang'));
         $this->validate($request,[
             'attorney_id' => ['required',Rule::in(Attorney::get()->pluck('id')->toArray())],
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072|dimensions:width=285,height=300',
@@ -147,6 +155,7 @@ class vekilController extends Controller
 
     public function vekiller()
     {
+        App::setLocale(Cookie::get('lang'));
         return view('Front.Pages.attorneys',[
             'attorneys'=>Attorney::all()
         ]);

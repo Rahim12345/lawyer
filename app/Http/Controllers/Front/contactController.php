@@ -6,16 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Subscribe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 
 class contactController extends Controller
 {
     public function index()
     {
+        App::setLocale(Cookie::get('lang'));
         return view('Front.Pages.contact');
     }
 
     public function sendEmail(Request $request)
     {
+        App::setLocale(Cookie::get('lang'));
         $this->validate($request,[
             'name'=>'required|max:30',
             'email'=>'required|email',
@@ -60,6 +64,7 @@ class contactController extends Controller
 
     public function subscribe(Request $request)
     {
+        App::setLocale(Cookie::get('lang'));
         $this->validate($request,[
            'email'=>'required|email|unique:subscribes,email'
         ]);

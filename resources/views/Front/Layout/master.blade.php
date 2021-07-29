@@ -39,7 +39,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/responsive.css">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet" type="text/css">
     @toastr_css
     @yield('css')
 </head>
@@ -93,6 +93,16 @@
                         </li>
                         <li {{ \Illuminate\Support\Facades\Route::currentRouteName() == 'front.contact' ? "class=current" : '' }}>
                             <a href="{{ route('front.contact') }}">{{ __('front_master.contact') }}</a>
+                        </li>
+                        <li>
+                        <div class="d-lg-block d-none dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink78" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 16px;font-weight: bold;color: #333333">Dillər</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink78">
+                                <a class="dropdown-item" href="{{ route('front.lang','az') }}"><span class="flag-icon flag-icon-az"></span> AZ</a>
+                                <a class="dropdown-item" href="{{ route('front.lang','en') }}"><span class="flag-icon flag-icon-gb"></span> EN</a>
+                                <a class="dropdown-item" href="{{ route('front.lang','fr') }}"><span class="flag-icon flag-icon-fr"></span> FR</a>
+                            </div>
+                        </div>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
