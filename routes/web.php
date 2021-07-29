@@ -39,6 +39,9 @@ Route::get('attorneys', [ vekilController::class,'vekiller'] )
 Route::get('about', [ aboutController::class,'index'] )
     ->name('front.about');
 
+Route::post('get-free-case-evaluation', [ aboutController::class,'getFreeCaseEvaluation'] )
+    ->name('front.get.free.case.evaluation');
+
 
 Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
     Route::get('dashboard', [ dashboardController::class,'index'] )
@@ -76,4 +79,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
 
     Route::post('vekiller-update',[vekilController::class,'update'])
         ->name('admin.vekiller.update');
+
+    Route::resource('about',\App\Http\Controllers\Admin\aboutController::class);
 });

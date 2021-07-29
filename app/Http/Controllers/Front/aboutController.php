@@ -15,4 +15,9 @@ class aboutController extends Controller
             'attorneys'=>Attorney::all()
         ]);
     }
+
+    public function getFreeCaseEvaluation(Request $request)
+    {
+
+    }
 }

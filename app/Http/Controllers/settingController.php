@@ -17,6 +17,10 @@ class settingController extends Controller
             'facebook'=>Options::getOption('facebook'),
             'instagram'=>Options::getOption('instagram'),
             'youtube'=>Options::getOption('youtube'),
+            'legal_solutions'=>Options::getOption('legal_solutions'),
+            'cases_we_won'=>Options::getOption('cases_we_won'),
+            'free_consultations'=>Options::getOption('free_consultations'),
+            'cases_dismissed'=>Options::getOption('cases_dismissed'),
         ]);
     }
 
@@ -29,9 +33,17 @@ class settingController extends Controller
             'facebook'=>'required|url|max:150',
             'instagram'=>'required|url|max:150',
             'youtube'=>'required|url|max:150',
+            'legal_solutions'=>'required|integer|between:1,100',
+            'cases_we_won'=>'required|integer|between:1,100',
+            'free_consultations'=>'required|integer|between:1,10000',
+            'cases_dismissed'=>'required|integer|between:1,10000'
         ],[],[
             'tel'=>__('admin_master.tel'),
-            'email'=>'Email'
+            'email'=>'Email',
+            'legal_solutions'=>__('front_about.legal_solutions'),
+            'cases_we_won'=>__('front_about.cases_we_won'),
+            'free_consultations'=>__('front_about.free_consultations'),
+            'cases_dismissed'=>__('front_about.cases_dismissed'),
         ]);
 
         foreach ($request->keys() as $key)
