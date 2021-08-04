@@ -12,5 +12,7 @@ return [
     'subscribers'=>'Subscribers',
     'attorneys'=>'Attorneys',
     'add'=>'Add',
-    'all'=>'All'
+    'all'=>'All',
+    'services'=>'Services',
+    'all_services'=>'All services',
 ];

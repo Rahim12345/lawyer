@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\notificationsController;
+use App\Http\Controllers\Admin\serviceController;
 use App\Http\Controllers\Admin\subsciberController;
 use App\Http\Controllers\Admin\vekilController;
 use App\Http\Controllers\Auth\loginController;
@@ -81,6 +82,12 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
         ->name('admin.vekiller.update');
 
     Route::resource('about',\App\Http\Controllers\Admin\aboutController::class);
+
+    Route::resource('service', serviceController::class);
+    Route::post('service-photo-az', [serviceController::class,'upload'])->name('admin.upload.service.photo');
+    Route::post('service-translate-to-az', [serviceController::class,'translateToAz'])->name('admin.service.translate.to.az');
+
+    Route::post('service-translate-to-en', [serviceController::class,'translateToEn'])->name('admin.service.translate.to.en');
 });
 
 Route::get('/{lang}',[ homeController::class,'lang' ])

@@ -26,5 +26,6 @@ return [
     'need_an_advice'=>'Mütəxəssis Hüquqşünaslardan bir tövsiyəyə ehtiyacınız var?',
     'get_appointment'=>'Bu gün randevu alın!',
     'quick_help'=>'Zəng edin',
-    'live_support'=>'canlı dəstək'
+    'live_support'=>'canlı dəstək',
+    'lang'=>'Dillər'
 ];

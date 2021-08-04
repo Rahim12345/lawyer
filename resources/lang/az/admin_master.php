@@ -12,5 +12,7 @@ return [
     'subscribers'=>'Abunələr',
     'attorneys'=>'Vəkillər',
     'add'=>'Əlavə et',
-    'all'=>'Bütün'
+    'all'=>'Bütün',
+    'services'=>'Xidmətlər',
+    'all_services'=>'Bütün xidmətlər',
 ];

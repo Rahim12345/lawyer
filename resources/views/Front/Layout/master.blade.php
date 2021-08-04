@@ -96,7 +96,7 @@
                         </li>
                         <li>
                         <div class="d-lg-block d-none dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink78" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 16px;font-weight: bold;color: #333333">Dillər</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink78" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 16px;font-weight: bold;color: #333333">{{ __('front_master.lang') }}</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink78">
                                 <a class="dropdown-item" href="{{ route('front.lang','az') }}"><span class="flag-icon flag-icon-az"></span> AZ</a>
                                 <a class="dropdown-item" href="{{ route('front.lang','en') }}"><span class="flag-icon flag-icon-gb"></span> EN</a>
