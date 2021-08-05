@@ -16,14 +16,15 @@
                 <h3 class="card-title">{{ __('admin_master.add') }}</h3>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ route('service.store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('service.update',$service->id) }}" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="form-group mb-5">
                         <div class="form-group">
                             <label for="photo" class="form-label">Cover (360x250)</label>
                             <div class="col-sm-10">
                                 <div class="dropzone">
-                                    <img id="preview" src="{{ asset('assets/images/Add-photo-icon.png') }}" alt="Add photo icon"/>
+                                    <img id="preview" src="{{ asset('storage/service-covers/'.$service->cover) }}" alt="Add photo icon"/>
                                     <input type="file" name="photo" class="upload-input" id="photo" value="{{ old('photo') }}" aria-describedby="photoHelp"/>
                                 </div>
                             </div>
@@ -35,7 +36,7 @@
                     <div class="form-group row mb-3">
                         <label for="service_name_az" class="col-sm-2 col-form-label">Xidmətin adı(AZ)</label>
                         <div class="col-sm-10">
-                            <input type="text" name="service_name_az" id="service_name_az" value="{{ old('name') }}" class="form-control" id="name">
+                            <input type="text" name="service_name_az" id="service_name_az" value="{{ old('service_name_az',$service->service_name_az) }}" class="form-control" id="name">
                             @error('service_name_az')
                             <small class="form-hint text-danger">{{ $message }}</small>
                             @enderror
@@ -45,7 +46,7 @@
                     <div class="form-group row mb-3">
                         <label for="service_name_en" class="col-sm-2 col-form-label">Xidmətin adı(EN)</label>
                         <div class="col-sm-10">
-                            <input type="text" name="service_name_en" id="service_name_en" value="{{ old('service_name_en') }}" class="form-control" id="name">
+                            <input type="text" name="service_name_en" id="service_name_en" value="{{ old('service_name_en',$service->service_name_en) }}" class="form-control" id="name">
                             @error('service_name_en')
                             <small class="form-hint text-danger">{{ $message }}</small>
                             @enderror
@@ -55,7 +56,7 @@
                     <div class="form-group row mb-3">
                         <label for="service_less_az" class="col-sm-2 col-form-label">Xidmət haqqında qısa məlumat(AZ)</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" name="service_less_az" id="service_less_az" cols="30" rows="2">{{ old('service_less_az') }}</textarea>
+                            <textarea class="form-control" name="service_less_az" id="service_less_az" cols="30" rows="2">{{ old('service_less_az',$service->service_less_az) }}</textarea>
                             @error('service_less_az')
                             <small class="form-hint text-danger">{{ $message }}</small>
                             @enderror
@@ -65,7 +66,7 @@
                     <div class="form-group row mb-3">
                         <label for="service_less_en" class="col-sm-2 col-form-label">Xidmət haqqında qısa məlumat(EN)</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" name="service_less_en" id="service_less_en" cols="30" rows="2">{{ old('service_less_en') }}</textarea>
+                            <textarea class="form-control" name="service_less_en" id="service_less_en" cols="30" rows="2">{{ old('service_less_en',$service->service_less_en) }}</textarea>
                             @error('service_less_en')
                             <small class="form-hint text-danger">{{ $message }}</small>
                             @enderror
@@ -75,7 +76,7 @@
                     <div class="form-group row mb-3">
                         <label for="service_more_az" class="col-sm-2 col-form-label">Xidmət haqqında-Ətraflı(AZ)</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" name="service_more_az" id="service_more_az" cols="30" rows="4">{{ old('service_more_az') }}</textarea>
+                            <textarea class="form-control" name="service_more_az" id="service_more_az" cols="30" rows="4">{{ old('service_more_az',$service->service_more_az) }}</textarea>
                             @error('service_more_az')
                             <small class="form-hint text-danger">{{ $message }}</small>
                             @enderror
@@ -85,7 +86,7 @@
                     <div class="form-group row mb-3">
                         <label for="service_more_en" class="col-sm-2 col-form-label">Xidmət haqqında-Ətraflı(EN)</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" name="service_more_en" id="service_more_en" cols="30" rows="4">{{ old('service_more_en') }}</textarea>
+                            <textarea class="form-control" name="service_more_en" id="service_more_en" cols="30" rows="4">{{ old('service_more_en',$service->service_more_en) }}</textarea>
                             @error('service_more_en')
                             <small class="form-hint text-danger">{{ $message }}</small>
                             @enderror
@@ -94,7 +95,7 @@
 
 
                     <div class="form-footer">
-                        <button type="submit" class="btn btn-primary float-end">Əlavə et</button>
+                        <button type="submit" class="btn btn-primary float-end">Redaktə et</button>
                     </div>
                 </form>
             </div>

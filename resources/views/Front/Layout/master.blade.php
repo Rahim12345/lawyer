@@ -82,7 +82,7 @@
                         </li>
 
                         <li>
-                            <a href="#">{{ __('front_master.services') }}</a>
+                            <a href="{{ route('front.services') }}">{{ __('front_master.services') }}</a>
                         </li>
 
                         <li>

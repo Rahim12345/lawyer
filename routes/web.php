@@ -40,6 +40,9 @@ Route::get('attorneys', [ vekilController::class,'vekiller'] )
 Route::get('about', [ aboutController::class,'index'] )
     ->name('front.about');
 
+Route::get('services', [ serviceController::class,'frontService'] )
+    ->name('front.services');
+
 Route::post('get-free-case-evaluation', [ aboutController::class,'getFreeCaseEvaluation'] )
     ->name('front.get.free.case.evaluation');
 
@@ -87,7 +90,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
     Route::post('service-photo-az', [serviceController::class,'upload'])->name('admin.upload.service.photo');
     Route::post('service-translate-to-az', [serviceController::class,'translateToAz'])->name('admin.service.translate.to.az');
 
-    Route::post('service-translate-to-en', [serviceController::class,'translateToEn'])->name('admin.service.translate.to.en');
 });
 
 Route::get('/{lang}',[ homeController::class,'lang' ])
