@@ -1203,7 +1203,7 @@ a:focus {
 * 3. inner-banner style
 */
 .inner-banner {
-  background-image: url(../images/background/inner-banner-bg-1-1.jpg);
+  background-image: url(../images/background/new-inner-banner-bg-1-1.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -5002,7 +5002,7 @@ a:focus {
   position: absolute;
   bottom: 0;
   right: 0;
-  background-image: url(../images/background/cta-bg-2.jpg);
+  background-image: url(../images/background/new-cta-bg-2.jpg);
   background-position: 0 0;
   width: 636px;
   height: 424px;

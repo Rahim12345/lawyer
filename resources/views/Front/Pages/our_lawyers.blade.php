@@ -1,27 +1,10 @@
-@extends('Front.Layout.master')
-
-@section('title')
-
-@endsection
-
-@section('css')
-
-@endsection
-
-@section('content')
-    <section class="inner-banner inner-banner__overlay-none" style="background-image: url({{ asset('assets/front/images/background/new-inner-banner-bg-1-2.jpg') }})">
-        <div class="container">
-            <p class="inner-banner__tag-line">{{ __('front_about.most_successful_law_firm') }}</p><!-- /.inner-banner__tag-line -->
-            <ul class="list-unstyled thm-breadcrumb">
-                <li><a href="{{ route('front.home') }}">{{ __('front_master.home_upper') }}</a></li>
-                <li>{{ __('front_master.attorneys') }}</li>
-            </ul><!-- /.thm-breadcrumb -->
-        </div><!-- /.container -->
-    </section><!-- /.inner-banner -->
-
-    <section class="team-one team-one__home-two">
-        <div class="container">
-            @foreach($attorneys->chunk(4) as $chunk)
+<section class="team-one team-one__home-two">
+    <div class="container">
+        <div class="block-title text-center">
+            <h3 class="block-title__title">{{ __('front_about.meet_our_lawyers') }}</h3><!-- /.block-title__title -->
+            <p class="block-title__text-two">Proident sunt culpa officia deserunt mollit animd laborum perspicial</p><!-- /.block-title__text-one -->
+        </div><!-- /.block-title -->
+        @foreach($attorneys->chunk(4) as $chunk)
             <div class="row no-gutters">
                 @foreach($chunk as $attorney)
                     <div class="col-lg-3 col-md-6 col-sm-12">
@@ -47,11 +30,6 @@
                     </div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
                 @endforeach
             </div><!-- /.row -->
-            @endforeach
-        </div><!-- /.container -->
-    </section><!-- /.team-one -->
-@endsection
-
-@section('js')
-
-@endsection
+        @endforeach
+    </div><!-- /.container -->
+</section><!-- /.team-one -->

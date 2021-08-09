@@ -18,6 +18,7 @@ class Service extends Model
         'service_less_az',
         'service_less_en',
         'service_more_az',
-        'service_more_en'
+        'service_more_en',
+        'slug'
     ];
 }

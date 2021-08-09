@@ -20,7 +20,7 @@
                     <input type="hidden" name="add_or_update" id="add_or_update" value="{{ \App\Helpers\Options::getOption('photo_banner') && \App\Helpers\Options::getOption('photo_mission') ? 1 : 0 }}">
                     <div class="form-group mb-5">
                         <div class="form-group">
-                            <label for="photo_banner" class="form-label">Banner (1920x1280)</label>
+                            <label for="photo_banner" class="form-label">Banner (1920x1285)</label>
                             <div class="col-sm-10">
                                 <div class="dropzone">
                                     <img id="preview_banner" src="{{ \App\Helpers\Options::getOption('photo_banner') ? asset('storage/about/banners/').'/'.\App\Helpers\Options::getOption('photo_banner') : asset('assets/images/Add-photo-icon.png') }}" alt="Add photo icon"/>
@@ -33,7 +33,7 @@
 
                     <div class="form-group mb-5">
                         <div class="form-group">
-                            <label for="photo_mission" class="form-label">Missiya şəkili (1920x685)</label>
+                            <label for="photo_mission" class="form-label">Missiya şəkili (960x685)</label>
                             <div class="col-sm-10">
                                 <div class="dropzone">
                                     <img id="preview_mission" src="{{ \App\Helpers\Options::getOption('photo_mission') ? asset('storage/about/missions/').'/'.\App\Helpers\Options::getOption('photo_mission') : asset('assets/images/Add-photo-icon.png') }}" alt="Add photo icon"/>
@@ -84,14 +84,14 @@
                     let img = new Image()
                     img.src = window.URL.createObjectURL(event.target.files[0])
                     img.onload = () => {
-                        if (img.width === 1920 && img.height === 1280)
+                        if (img.width === 1920 && img.height === 1285)
                         {
                             reader.readAsDataURL( event.target.files[ 0 ] );
                         }
                         else
                         {
                             $( this ).val( '' );
-                            toastr.error( 'Please only add images 1920x1280', 'Attention' );
+                            toastr.error( 'Please only add images 1920x1285', 'Attention' );
                         }
                     }
                 }
@@ -125,14 +125,14 @@
                     let img = new Image()
                     img.src = window.URL.createObjectURL(event.target.files[0])
                     img.onload = () => {
-                        if (img.width === 1920 && img.height === 685)
+                        if (img.width === 960 && img.height === 685)
                         {
                             reader.readAsDataURL( event.target.files[ 0 ] );
                         }
                         else
                         {
                             $( this ).val( '' );
-                            toastr.error( 'Please only add images 1920x685', 'Attention' );
+                            toastr.error( 'Please only add images 960x685', 'Attention' );
                         }
                     }
                 }

@@ -42,8 +42,8 @@ class aboutController extends Controller
         if ($request->add_or_update == 0)
         {
             $this->validate($request,[
-                'photo_banner'=>'required|mimes:jpeg,png,jpg,gif|max:3072|dimensions:width=1920,height=1280',
-                'photo_mission'=>'required|mimes:jpeg,png,jpg,gif|max:3072|dimensions:width=1920,height=685'
+                'photo_banner'=>'required|mimes:jpeg,png,jpg,gif|max:3072|dimensions:width=1920,height=1285',
+                'photo_mission'=>'required|mimes:jpeg,png,jpg,gif|max:3072|dimensions:width=960,height=685'
             ],[],[
                 'photo_banner'=>'Banner şəkli',
                 'photo_mission'=>'Missiya şəkli'

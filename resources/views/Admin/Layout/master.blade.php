@@ -39,7 +39,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         <a href="#" class="dropdown-item">{{ __('admin_master.profile_and_account') }}</a>
-                        <a href="{{ route('admin.notifications') }}" class="dropdown-item">{{ __('admin_master.notifications') }} - &nbsp;<span class="badge bg-red float-right">{{ $notification_count }}</span></a>
+                        <a href="{{ route('admin.notifications',['slug'=>'contact-notifications']) }}" class="dropdown-item">{{ __('admin_master.notifications') }} - &nbsp;<span class="badge bg-red float-right">{{ $notification_count }}</span></a>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('logout') }}" class="dropdown-item">{{ __('admin_master.logout') }}</a>
                     </div>

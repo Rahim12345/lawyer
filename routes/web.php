@@ -43,7 +43,10 @@ Route::get('about', [ aboutController::class,'index'] )
 Route::get('services', [ serviceController::class,'frontService'] )
     ->name('front.services');
 
-Route::post('get-free-case-evaluation', [ aboutController::class,'getFreeCaseEvaluation'] )
+Route::get('services/{slug}', [ serviceController::class,'frontSingleService'] )
+    ->name('front.single.services');
+
+Route::post('get-free-case-evaluation', [ serviceController::class,'getFreeCaseEvaluation'] )
     ->name('front.get.free.case.evaluation');
 
 
@@ -57,7 +60,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
     Route::post('settings', [ settingController::class,'store'] )
         ->name('admin.settings.store');
 
-    Route::get('notifications', [ notificationsController::class,'index'] )
+    Route::get('notifications/{slug}', [ notificationsController::class,'index'] )
         ->name('admin.notifications');
 
     Route::get('single-notification/{id}', [ notificationsController::class,'show'] )

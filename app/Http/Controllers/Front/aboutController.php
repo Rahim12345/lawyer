@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attorney;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
@@ -14,13 +15,8 @@ class aboutController extends Controller
     {
         App::setLocale(Cookie::get('lang'));
         return view('Front.Pages.about',[
-            'attorneys'=>Attorney::all()
+            'attorneys'=>Attorney::all(),
+            'services'=>Service::all()
         ]);
-    }
-
-    public function getFreeCaseEvaluation(Request $request)
-    {
-        App::setLocale(Cookie::get('lang'));
-
     }
 }

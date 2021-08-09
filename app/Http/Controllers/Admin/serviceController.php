@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Evaluation;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 use Stichoza\GoogleTranslate\GoogleTranslate;
@@ -74,7 +77,8 @@ class serviceController extends Controller
             'service_less_az'=>$request->service_less_az,
             'service_less_en'=>$request->service_less_en,
             'service_more_az'=>$request->service_more_az,
-            'service_more_en'=>$request->service_more_en
+            'service_more_en'=>$request->service_more_en,
+            'slug'=>str_slug($request->service_name_en)
         ]);
 
         toastr()->success('Xidmət uğurla əlavə edildi','Uğurlu əməliyyat');
@@ -164,7 +168,8 @@ class serviceController extends Controller
             'service_less_az'=>$request->service_less_az,
             'service_less_en'=>$request->service_less_en,
             'service_more_az'=>$request->service_more_az,
-            'service_more_en'=>$request->service_more_en
+            'service_more_en'=>$request->service_more_en,
+            'slug'=>str_slug($request->service_name_en)
         ]);
 
         toastr()->success('Data updated successfully','Success');
@@ -228,8 +233,56 @@ class serviceController extends Controller
 
     public function frontService()
     {
+        App::setLocale(Cookie::get('lang'));
         return view('Front.Pages.service',[
             'services'=>Service::all()
+        ]);
+    }
+
+    public function frontSingleService($slug)
+    {
+        App::setLocale(Cookie::get('lang'));
+        $service = Service::where('slug',$slug)->first();
+        if ($service === null)
+        {
+            abort();
+        }
+
+        return view('Front.Pages.single-service',[
+           'service'=>$service
+        ]);
+    }
+
+    public function getFreeCaseEvaluation(Request $request)
+    {
+        App::setLocale(Cookie::get('lang'));
+
+        $this->validate($request,[
+            'appointment_name'=>'required|max:50',
+            'appointment_email'=>'required|max:50',
+            'appointment_phone'=>'required|max:50',
+            'appointment_date'=>'required|max:50',
+            'appointment_clock'=>['required',Rule::in(['9.01-12.00','12.01-15.00','15.01-11.00'])],
+            'appointment_service'=>['required',Rule::in(Service::pluck('id')->toArray())],
+            'appointment_message'=>'required|max:5000',
+        ],[],[
+            'appointment_name'=>__('front_master.your_name'),
+            'appointment_email'=>__('login.email'),
+            'appointment_phone'=>__('front_master.phone'),
+            'appointment_date'=>__('front_about.select_day'),
+            'appointment_clock'=>__('front_about.select_time'),
+            'appointment_service'=>__('front_about.service_required'),
+            'appointment_message'=>__('front_master.message'),
+        ]);
+
+        Evaluation::create([
+            'name'=>$request->appointment_name,
+            'email'=>$request->appointment_email,
+            'phone'=>$request->appointment_phone,
+            'date'=>$request->appointment_date,
+            'clock'=>$request->appointment_clock,
+            'service_id'=>$request->appointment_service,
+            'message'=>$request->appointment_message
         ]);
     }
 }

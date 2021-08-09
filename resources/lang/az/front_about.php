@@ -12,4 +12,9 @@ return [
     'meet_our_lawyers'=>'Hüquqşünaslarımızla tanış olun',
     'skilled_lawyers_at_help_with_a_clear_mission'=>'Bacarıqlı Hüquqşünaslar Kömək Üçün Aydın Bir Missiya İlə',
     'most_successful_law_firm'=>'Ən Uğurlu Hüquq Firması',
+    'solving_issues_with_great_attention'=>'Problemləri həll etməyə böyük diqqət',
+    'learn_more'=>'Daha Çox',
+    'select_day'=>'Gün Seçin',
+    'select_time'=>'Saat Seçin',
+    'service_required'=>'Xidmət Seçin'
 ];

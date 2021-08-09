@@ -18,10 +18,10 @@ class CreateServicesTable extends Migration
             $table->string('cover');
             $table->string('service_name_az');
             $table->string('service_name_en');
-            $table->string('service_less_az');
-            $table->string('service_less_en');
-            $table->string('service_more_az');
-            $table->string('service_more_en');
+            $table->text('service_less_az');
+            $table->text('service_less_en');
+            $table->text('service_more_az');
+            $table->text('service_more_en');
             $table->timestamps();
         });
     }

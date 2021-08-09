@@ -25,15 +25,15 @@
                 <div class="col-xl-5">
                     <div class="about-two__content">
                         <p class="about-two__tag-line">Proident sunt culpa officia deserunt </p><!-- /.about-two__tag-line -->
-                        <h3 class="about-two__title">Solving issues with <br> great attention.</h3><!-- /.about-two__title -->
+                        <h3 style="font-family: Arial" class="about-two__title">{{ __('front_about.solving_issues_with_great_attention') }}.</h3><!-- /.about-two__title -->
                         <p class="about-two__text">Labore et dolore magna aliqu. Ut enim ad minim veniam, quis nostrud exercitation ullamco dui laboris nisi ut aliquip ex dea commodo consequat. Duis aute irure dolor reprehenderit kind voluptate velit ese cillum dolore fugiat nula pariatur. Excepteur sint occaecat cupidatas non.</p><!-- /.about-two__text -->
-                        <a href="#" class="thm-btn about-two__btn">view services <i class="fa fa-long-arrow-alt-right"></i></a>
+                        <a href="{{ route('front.services') }}" class="thm-btn about-two__btn">{{ __('front_master.services') }} <i class="fa fa-long-arrow-alt-right"></i></a>
                     </div><!-- /.about-two__content -->
                 </div><!-- /.col-xl-5 -->
                 <div class="col-xl-7">
                     <div class="about-two__images wow fadeInRight" data-wow-duration="1500ms">
-                        <img src="{{ asset('assets/front') }}/images/resources/about-1-1.jpg" alt="" />
-                        <img src="{{ asset('assets/front') }}/images/resources/about-1-2.jpg" alt="" />
+                        <img src="{{ asset('assets/front') }}/images/resources/new-about-1-1.jpg" alt="" />
+                        <img src="{{ asset('assets/front') }}/images/resources/new-about-1-2.jpg" alt="" />
                     </div><!-- /.about-two__images -->
                 </div><!-- /.col-xl-7 -->
             </div><!-- /.row -->
@@ -48,9 +48,9 @@
                     <div class="col-lg-4">
                         <div class="service-one__single wow fadeInUp" data-wow-duration="1500ms">
                             <i class="service-one__icon  opklim-service-1-1"></i>
-                            <h3 class="service-one__title"><a href="contact.html">free case evaluation</a></h3><!-- /.service-one__title -->
+                            <h3 style="@if(app()->getLocale() == 'az') font-size : 16px !important; @endif" class="service-one__title"><a href="{{ route('front.contact') }}">{{ __('front_service.free_case_evaluation') }}</a></h3><!-- /.service-one__title -->
                             <p class="service-one__text">Deserunt mollit animd laborum perspic</p><!-- /.service-one__text -->
-                            <a href="#" class="thm-btn service-one__btn">Learn More <i class="fa fa-long-arrow-alt-right"></i></a>
+                            <a href="javascript: void(0)" class="thm-btn service-one__btn" id="caseBtn">{{ __('front_about.learn_more') }} <i class="fa fa-long-arrow-alt-right"></i></a>
                         </div><!-- /.service-one__single -->
                     </div><!-- /.col-lg-4 -->
                     <div class="col-lg-4">
@@ -58,7 +58,7 @@
                             <i class="service-one__icon  opklim-service-1-2"></i>
                             <h3 class="service-one__title"><a href="{{ route('front.contact') }}">{{ __('front_about.find_a_lawyer') }}</a></h3><!-- /.service-one__title -->
                             <p class="service-one__text">Deserunt mollit animd laborum perspic</p><!-- /.service-one__text -->
-                            <a href="{{ route('front.contact') }}" class="thm-btn service-one__btn">{{ __('front_master.book_an_appointment') }} <i class="fa fa-long-arrow-alt-right"></i></a>
+                            <a href="{{ route('front.contact') }}" class="thm-btn service-one__btn">{{ __('front_about.learn_more') }} <i class="fa fa-long-arrow-alt-right"></i></a>
                         </div><!-- /.service-one__single -->
                     </div><!-- /.col-lg-4 -->
                     <div class="col-lg-4">
@@ -66,7 +66,7 @@
                             <i class="service-one__icon  opklim-service-1-3"></i>
                             <h3 class="service-one__title"><a href="contact.html">Corporate ligitation</a></h3><!-- /.service-one__title -->
                             <p class="service-one__text">Deserunt mollit animd laborum perspic</p><!-- /.service-one__text -->
-                            <a href="#" class="thm-btn service-one__btn">Learn More <i class="fa fa-long-arrow-alt-right"></i></a>
+                            <a href="#" class="thm-btn service-one__btn">{{ __('front_about.learn_more') }} <i class="fa fa-long-arrow-alt-right"></i></a>
                         </div><!-- /.service-one__single -->
                     </div><!-- /.col-lg-4 -->
                 </div><!-- /.row -->
@@ -158,42 +158,7 @@
         </div><!-- /.container -->
     </section><!-- /.fact-three -->
 
-    <section class="team-one team-one__home-two">
-        <div class="container">
-            <div class="block-title text-center">
-                <h3 class="block-title__title">{{ __('front_about.meet_our_lawyers') }}</h3><!-- /.block-title__title -->
-                <p class="block-title__text-two">Proident sunt culpa officia deserunt mollit animd laborum perspicial</p><!-- /.block-title__text-one -->
-            </div><!-- /.block-title -->
-            @foreach($attorneys->chunk(4) as $chunk)
-                <div class="row no-gutters">
-                    @foreach($chunk as $attorney)
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            <div class="team-one__single">
-                                <div class="team-one__image">
-                                    <img src="{{ asset('storage/attorneys/'.$attorney->photo) }}" alt="{{ $attorney->name }}" />
-                                    <div class="team-one__image-hover">
-                                        <div class="team-one__social">
-                                            <a href="{{ $attorney->youtube }}" target="_blank" class="fab fa-youtube"></a>
-                                            <a href="{{ $attorney->twitter }}" target="_blank" class="fab fa-twitter"></a>
-                                            <a href="{{ $attorney->facebook }}" target="_blank" class="fab fa-facebook"></a>
-                                            <a href="{{ $attorney->instagram }}" target="_blank" class="fab fa-instagram"></a>
-                                        </div><!-- /.team-one__social -->
-                                        <a href="mailto:{{ $attorney->email }}" class="team-one__contact">{{ $attorney->email }}</a>
-                                        <a href="tel:{{ $attorney->tel }}" class="team-one__contact">Tel: <span>{{ $attorney->tel }}</span></a>
-                                    </div><!-- /.team-one__image-hover -->
-                                </div><!-- /.team-one__image -->
-                                <div class="team-one__content">
-                                    <h3 class="team-one__name">{{ $attorney->name_lastname }}</h3><!-- /.team-one__name -->
-                                    <p class="team-one__designation">{{ $attorney->job }}</p><!-- /.team-one__designation -->
-                                </div><!-- /.team-one__content -->
-                            </div><!-- /.team-one__single -->
-                        </div><!-- /.col-lg-3 col-md-6 col-sm-12 -->
-                    @endforeach
-                </div><!-- /.row -->
-            @endforeach
-        </div><!-- /.container -->
-    </section><!-- /.team-one -->
-
+    @include('Front.Pages.our_lawyers')
 
     <section class="cta-one">
         <div class="container text-center">
@@ -219,62 +184,72 @@
         <div class="container">
             <div class="inner-container wow fadeInUp" data-wow-duration="1500ms">
                 <div class="block-title text-center">
-                    <h3 class="block-title__title">Get Free Case Evaluation</h3><!-- /.block-title__title -->
+                    <h3 class="block-title__title">{{ __('front_service.free_case_evaluation') }}</h3><!-- /.block-title__title -->
                     <p class="block-title__text-one">Proident sunt culpa officia deserunt mollit animd laborum perspicia natus <br> error voluptatem qui acusantium doloremque laudan.</p><!-- /.block-title__text-one -->
                 </div><!-- /.block-title -->
-                <form action="{{ route('front.get.free.case.evaluation') }}" id="my-form" class="case-form-one__form contact-form-validated">
+                <form method="POST" action="" onsubmit="return false" class="case-form-one__form contact-form-validated">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="case-form-one__field">
-                                <input type="text" name="name" placeholder="Your Name">
+                                <input type="text" name="name" id="appointment_name" placeholder="{{ __('front_master.your_name') }}">
+                                <small class="text-danger" id="appointment_name-error"></small>
                             </div><!-- /.case-form-one__field -->
                         </div><!-- /.col-md-6 col-sm-12 -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="case-form-one__field">
-                                <input type="text" name="email" placeholder="Email">
+                                <input type="text" name="email" id="appointment_email" placeholder="{{ __('login.email') }}">
+                                <small class="text-danger" id="appointment_email-error"></small>
                             </div><!-- /.case-form-one__field -->
                         </div><!-- /.col-md-6 col-sm-12 -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="case-form-one__field">
-                                <input type="text" name="phone" placeholder="Phone">
+                                <input type="text" name="phone" id="appointment_phone" placeholder="{{ __('front_master.phone') }}">
+                                <small class="text-danger" id="appointment_phone-error"></small>
                             </div><!-- /.case-form-one__field -->
                         </div><!-- /.col-md-6 col-sm-12 -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="case-form-one__field">
                                 <i class="far fa-calendar-alt"></i>
-                                <input type="text" name="date" class="datepicker" placeholder="Select Day">
+                                <input type="text" name="date" id="appointment_date" class="datepicker" placeholder="{{ __('front_about.select_day') }}">
+                                <small class="text-danger" id="appointment_date-error"></small>
                             </div><!-- /.case-form-one__field -->
                         </div><!-- /.col-md-6 col-sm-12 -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="case-form-one__field">
-                                <select class="selectpicker" name="time">
-                                    <option value="">Select Time</option>
-                                    <option value="8.00-9.00">8.00-9.00</option>
-                                    <option value="9.01-10.00">9.01-10.00</option>
-                                    <option value="10.01-11.00">10.01-11.00</option>
-                                    <option value="12.01-13.00">12.01-13.00</option>
+                                <select class="selectpicker" name="time" id="appointment_clock">
+                                    <option value="">{{ __('front_about.select_time') }}</option>
+                                    <option value="9.01-12.00">9.01-12.00</option>
+                                    <option value="12.01-15.00">12.01-15.00</option>
+                                    <option value="15.01-11.00">15.01-18.00</option>
                                 </select>
+                                <small class="text-danger" id="appointment_clock-error"></small>
                             </div><!-- /.case-form-one__field -->
                         </div><!-- /.col-md-6 col-sm-12 -->
                         <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="case-form-one__field">
-                                <select class="selectpicker" name="services">
-                                    <option>Service Required</option>
-                                    <option value="Real Estate Laws">Real Estate Laws</option>
-                                    <option value="Personal Injury">Personal Injury</option>
-                                    <option value="Criminal Laws">Criminal Laws</option>
-                                    <option value="Health Related Laws">Health Related Laws</option>
+                                <select class="selectpicker" name="services" id="appointment_service">
+                                    <option>{{ __('front_about.service_required') }}</option>
+                                    @foreach($services as $service)
+                                        @if(app()->getLocale() == 'az')
+                                            <option value="{{ $service->id }}">{{ $service->service_name_az }}</option>
+                                        @else
+                                            <option value="{{ $service->id }}">{{ $service->service_name_en }}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
+                                <small class="text-danger" id="appointment_service-error"></small>
                             </div><!-- /.case-form-one__field -->
                         </div><!-- /.col-md-6 col-sm-12 -->
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="case-form-one__field">
-                                <textarea name="message" placeholder="Message"></textarea>
+                                <textarea name="message" id="appointment_message" placeholder="{{ __('front_master.message') }}"></textarea>
+                                <small class="text-danger" id="appointment_message-error"></small>
                             </div><!-- /.case-form-one__field -->
                         </div><!-- /.col-md-6 col-sm-12 -->
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="case-form-one__field text-center mb-0">
-                                <button type="submit" class="thm-btn case-form-one__btn">{{ __('front_master.book_an_appointment') }} <i class="fa fa-long-arrow-alt-right"></i></button>
+                                <input type="hidden" id="appointment_url" value="{{ route('front.get.free.case.evaluation') }}">
+                                <button type="button" id="appointment_btn" class="thm-btn case-form-one__btn">{{ __('front_master.book_an_appointment') }} <i class="fa fa-long-arrow-alt-right"></i></button>
                             </div><!-- /.case-form-one__field -->
                         </div><!-- /.col-md-6 col-sm-12 -->
                     </div><!-- /.row -->
@@ -286,12 +261,6 @@
 @endsection
 
 @section('js')
-    <script>
-        $(document).ready(function () {
-           $('#my-form').submit(function (event) {
-               event.preventDefault();
-               alert()
-           }) ;
-        });
-    </script>
+    <script src="{{ asset('js/case.js') }}"></script>
+    <script src="{{ asset('js/appointment.js') }}"></script>
 @endsection

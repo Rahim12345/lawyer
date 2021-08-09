@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 
 class notificationsController extends Controller
 {
-    public function index()
+    public function index($slug)
     {
-        return view('Admin.Pages.notifications');
+        return view('Admin.Pages.notifications',[
+            'slug'=>$slug
+        ]);
     }
 
     public function show($id)

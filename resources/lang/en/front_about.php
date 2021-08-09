@@ -14,4 +14,9 @@ return [
     'skilled_lawyers_at_help_with_a_clear_mission'=>'Skilled Lawyers at Help
 With a Clear Mission',
     'most_successful_law_firm'=>'Most Successful Law Firm',
+    'solving_issues_with_great_attention'=>'Solving issues with great attention',
+    'learn_more'=>'Learn More',
+    'select_day'=>'Select Day',
+    'select_time'=>'Select Time',
+    'service_required'=>'Service Required'
 ];
