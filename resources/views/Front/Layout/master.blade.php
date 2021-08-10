@@ -21,7 +21,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#e0a965">
     <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700&display=swap" rel="stylesheet">
 
-
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/animate.css">
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/bootstrap-datepicker.min.css">
@@ -39,12 +38,14 @@
 
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/responsive.css">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet" type="text/css">
     @toastr_css
     @yield('css')
 </head>
 
 <body>
+@include('Front.Pages.bottom-menu')
 <div class="preloader"><span><img src="{{ asset('assets/front') }}/images/resources/preloader.png" alt="Awesome Image" /></span></div><!-- /.preloader -->
 <div class="page-wrapper">
     <div class="topbar-two">
@@ -329,7 +330,7 @@ $(document).ready(function () {
     });
 });
 </script>
-
+<script src="{{ asset('js/bottom.js') }}"></script>
 @toastr_js
 @toastr_render
 @yield('js')
