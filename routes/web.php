@@ -6,10 +6,12 @@ use App\Http\Controllers\Admin\serviceController;
 use App\Http\Controllers\Admin\subsciberController;
 use App\Http\Controllers\Admin\vekilController;
 use App\Http\Controllers\Auth\loginController;
+use App\Http\Controllers\categoryController;
 use App\Http\Controllers\Front\aboutController;
 use App\Http\Controllers\Front\contactController;
 use App\Http\Controllers\Front\homeController;
 use App\Http\Controllers\settingController;
+use App\Http\Controllers\tagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get( '/login', [ loginController::class, 'login' ] )
@@ -92,6 +94,9 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
     Route::resource('service', serviceController::class);
     Route::post('service-photo-az', [serviceController::class,'upload'])->name('admin.upload.service.photo');
     Route::post('service-translate-to-az', [serviceController::class,'translateToAz'])->name('admin.service.translate.to.az');
+
+    Route::resource('tag', tagController::class );
+    Route::resource('category', categoryController::class );
 
 });
 
