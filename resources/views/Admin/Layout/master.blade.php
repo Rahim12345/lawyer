@@ -123,6 +123,9 @@
                                 <a class="dropdown-item" href="{{ route('tag.index') }}" >
                                     Taglar
                                 </a>
+                                <a class="dropdown-item" href="{{ route('blog.index') }}" >
+                                    Bloglar
+                                </a>
                             </div>
                         </li>
                     </ul>

@@ -61,6 +61,7 @@ Bütün xidmətlər
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-sm btn-danger" type="button" onclick="if(confirm('Are you sure?')) $(this).closest('form').submit();">Delete</button>
+                                                    <input type="hidden" name="_token">
                                                 </form>
                                             </div>
                                         </td>

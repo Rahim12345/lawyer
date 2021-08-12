@@ -35,7 +35,7 @@
                     <div class="form-group row mb-3">
                         <label for="service_name_az" class="col-sm-2 col-form-label">Xidmətin adı(AZ)</label>
                         <div class="col-sm-10">
-                            <input type="text" name="service_name_az" id="service_name_az" value="{{ old('service_name_az') }}" class="form-control" id="name">
+                            <input type="text" name="service_name_az" id="service_name_az" value="{{ old('service_name_az') }}" class="form-control">
                             @error('service_name_az')
                             <small class="form-hint text-danger">{{ $message }}</small>
                             @enderror
@@ -45,7 +45,7 @@
                     <div class="form-group row mb-3">
                         <label for="service_name_en" class="col-sm-2 col-form-label">Xidmətin adı(EN)</label>
                         <div class="col-sm-10">
-                            <input type="text" name="service_name_en" id="service_name_en" value="{{ old('service_name_en') }}" class="form-control" id="name">
+                            <input type="text" name="service_name_en" id="service_name_en" value="{{ old('service_name_en') }}" class="form-control">
                             @error('service_name_en')
                             <small class="form-hint text-danger">{{ $message }}</small>
                             @enderror

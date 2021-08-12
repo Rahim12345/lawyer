@@ -18,3 +18,8 @@
     opacity: 0;
     cursor: pointer;
 }
+
+#photo-error {
+    display: block;
+    margin-top: 10px;
+}

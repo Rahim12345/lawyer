@@ -20,6 +20,5 @@ $(document).ready(function () {
         link.rel = 'stylesheet';
         link.href = './css/bottom.css';
         document.head.appendChild(link);
-
     }
 });

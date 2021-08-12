@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\blogController;
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\notificationsController;
 use App\Http\Controllers\Admin\serviceController;
@@ -97,6 +98,13 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
 
     Route::resource('tag', tagController::class );
     Route::resource('category', categoryController::class );
+
+    Route::resource('blog', blogController::class );
+    Route::post('blog-photo', [blogController::class,'upload'])->name('admin.upload.blog.photo');
+    Route::post('blog-translate-to-az', [blogController::class,'translateToAz'])->name('admin.blog.translate.to.az');
+    Route::post('blog-update', [blogController::class,'myUpdate'])->name('admin.blog.update');
+    Route::get('blog-delete/{id}', [blogController::class,'myDelete'])->name('admin.blog.delete');
+    Route::post('blog-switcher', [blogController::class,'switcher'])->name('admin.blog.switcher');
 
 });
 
