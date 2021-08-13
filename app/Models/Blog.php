@@ -15,7 +15,9 @@ class Blog extends Model
         'photo',
         'category_id',
         'title_az',
+        'slug_az',
         'title_en',
+        'slug_en',
         'blog_az',
         'blog_en',
         'show'
@@ -29,5 +31,10 @@ class Blog extends Model
     public function getTags()
     {
         return $this->hasMany(TagBlogCenter::class,'blog_id','id')->select('tag_blog_centers.tag_id');
+    }
+
+    public function getComments()
+    {
+        return $this->hasMany(Comment::class,'blog_id','id');
     }
 }

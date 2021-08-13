@@ -27,6 +27,5 @@ return [
     'get_appointment'=>'Get an Appointment Today!',
     'quick_help'=>'Call us for a quick help!',
     'live_support'=>'live support',
-    'lang'=>'Languages'
-
+    'lang'=>'Languages',
 ];

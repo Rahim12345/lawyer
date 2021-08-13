@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/responsive.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/search.css') }}">
+
     @toastr_css
     @yield('css')
 </head>
@@ -55,11 +57,12 @@
                 <a class="topbar-two__link" target="_blank" href="mailto:{{ \App\Helpers\Options::getOption('email') }}"><i class="fa fa-envelope-open"></i>{{ \App\Helpers\Options::getOption('email') }}</a>
             </div><!-- /.topbar-two__left -->
             <div class="topbar-two__right">
-                <a href="#" class="thm-btn header-booking__btn">{{ __('front_master.book_an_appointment') }} <i class="fas fa-long-arrow-alt-right"></i></a>
+                <a href="{{ route('front.contact') }}" class="thm-btn header-booking__btn">{{ __('front_master.book_an_appointment') }} <i class="fas fa-long-arrow-alt-right"></i></a>
             </div><!-- /.topbar-two__right -->
         </div><!-- /.container -->
     </div><!-- /.topbar-two -->
-
+    <input type="hidden" id="bottomUrl" value="{{ asset('css/bottom.css') }}">
+    <input type="hidden" id="searchUrl" value="{{ route('front.search') }}">
     <header class="site-header site-header__header-two  ">
         <nav class="navbar navbar-expand-lg navbar-light header-navigation stricky">
             <div class="container clearfix">
@@ -90,7 +93,7 @@
                             <a href="{{ route('front.attorneys') }}">{{ __('front_master.attorneys') }}</a>
                         </li>
                         <li>
-                            <a href="#">{{ __('front_master.news') }}</a>
+                            <a href="{{ route('front.blog') }}">{{ __('blog.blogs') }}</a>
                         </li>
                         <li {{ \Illuminate\Support\Facades\Route::currentRouteName() == 'front.contact' ? "class=current" : '' }}>
                             <a href="{{ route('front.contact') }}">{{ __('front_master.contact') }}</a>
@@ -108,7 +111,6 @@
                     </ul>
                 </div><!-- /.navbar-collapse -->
                 <div class="right-side-box">
-                    <a href="#" class="header__search search-popup__toggler"><i class="fas fa-search"></i></a>
                     <a href="#" class="header__sidebar-toggler  side-menu__toggler"><i class="fas fa-bars"></i></a>
                 </div><!-- /.right-side-box -->
             </div>
@@ -331,6 +333,7 @@ $(document).ready(function () {
 });
 </script>
 <script src="{{ asset('js/bottom.js') }}"></script>
+<script src="{{ asset('js/search.js') }}"></script>
 @toastr_js
 @toastr_render
 @yield('js')

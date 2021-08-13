@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\TagBlogCenter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 use Stichoza\GoogleTranslate\GoogleTranslate;
@@ -109,7 +111,9 @@ class blogController extends Controller
             'photo'=>$new_name,
             'category_id'=>$request->kateqoriyas,
             'title_az'=>$request->title_az,
+            'slug_az'=>str_slug($request->title_az),
             'title_en'=>$request->title_en,
+            'slug_en'=>str_slug($request->title_en),
             'blog_az'=>$request->blog_az,
             'blog_en'=>$request->blog_en
         ]);
@@ -315,5 +319,190 @@ class blogController extends Controller
         $blog = Blog::whereId($request->id)->first();
         $blog->show ? $blog->show = 0 : $blog->show = 1;
         $blog->save();
+    }
+
+    public function frontIndex()
+    {
+        App::setLocale(Cookie::get('lang'));
+        return view('Front.Pages.blogs',[
+            'blogs'=>Blog::where('show',1)->orderBy('id','desc')->paginate(10),
+            'categories'=>Category::all(),
+            'tags'=>Tag::all()
+        ]);
+    }
+
+    public function frontSingle($slug)
+    {
+        App::setLocale(Cookie::get('lang'));
+        if (\app()->getLocale() == 'az')
+        {
+            $blog = Blog::where('slug_az',$slug)->first();
+            if ($blog === null)
+            {
+                $blog = Blog::where('slug_en',$slug)->first();
+                if ($blog === null)
+                {
+                    abort(404);
+                }
+                else
+                {
+                    return redirect()->route('front.single.blog',$blog->slug_az);
+                }
+            }
+        }
+        else
+        {
+            $blog = Blog::where('slug_en',$slug)->first();
+            if ($blog === null)
+            {
+                $blog = Blog::where('slug_az',$slug)->first();
+                if ($blog === null)
+                {
+                    abort(404);
+                }
+                else
+                {
+                    return redirect()->route('front.single.blog',$blog->slug_en);
+                }
+            }
+        }
+
+        return view('Front.Pages.single-blog',[
+            'blog'=>$blog,
+            'categories'=>Category::all(),
+            'tags'=>Tag::all()
+        ]);
+    }
+
+    public function Category($slug)
+    {
+        App::setLocale(Cookie::get('lang'));
+        if (\app()->getLocale() == 'az')
+        {
+            $category = Category::where('slug_az',$slug)->first();
+            if ($category === null)
+            {
+                $category = Category::where('slug_en',$slug)->first();
+                if ($category === null)
+                {
+                    abort(404);
+                }
+                else
+                {
+                    return redirect()->route('front.category',$category->slug_az);
+                }
+            }
+        }
+        else
+        {
+            $category = Category::where('slug_en',$slug)->first();
+            if ($category === null)
+            {
+                $category = Category::where('slug_az',$slug)->first();
+                if ($category === null)
+                {
+                    abort(404);
+                }
+                else
+                {
+                    return redirect()->route('front.category',$category->slug_en);
+                }
+            }
+        }
+
+        return view('Front.Pages.blogs',[
+            'blogs'=>Blog::where('category_id',$category->id)->where('show',1)->orderBy('id','desc')->paginate(10),
+            'categories'=>Category::all(),
+            'tags'=>Tag::all()
+        ]);
+    }
+
+    public function Tag($slug)
+    {
+        App::setLocale(Cookie::get('lang'));
+        if (\app()->getLocale() == 'az')
+        {
+            $tag = Tag::where('slug_az',$slug)->first();
+            if ($tag === null)
+            {
+                $tag = Tag::where('slug_en',$slug)->first();
+                if ($tag === null)
+                {
+                    abort(404);
+                }
+                else
+                {
+                    return redirect()->route('front.tag',$tag->slug_az);
+                }
+            }
+        }
+        else
+        {
+            $tag = Category::where('slug_en',$slug)->first();
+            if ($tag === null)
+            {
+                $tag = Tag::where('slug_az',$slug)->first();
+                if ($tag === null)
+                {
+                    abort(404);
+                }
+                else
+                {
+                    return redirect()->route('front.tag',$tag->slug_en);
+                }
+            }
+        }
+
+        $blog_ids = TagBlogCenter::where('tag_id',$tag->id)->pluck('blog_id')->toArray();
+        $blog_ids = array_unique($blog_ids);
+
+        return view('Front.Pages.blogs',[
+            'blogs'=>Blog::whereIn('id',$blog_ids)->where('show',1)->orderBy('id','desc')->paginate(10),
+            'categories'=>Category::all(),
+            'tags'=>Tag::all()
+        ]);
+    }
+
+    public function Search(Request $request)
+    {
+        $this->validate($request,[
+           'word'=>'required|min:3|max:30'
+        ]);
+        App::setLocale(Cookie::get('lang'));
+
+        if (\app()->getLocale() == 'az')
+        {
+            $blogs = Blog::where('title_az','like','%'.$request->word.'%')->take(5)->get();
+        }
+        else
+        {
+            $blogs = Blog::where('title_en','like','%'.$request->word.'%')->take(5)->get();
+        }
+
+        $output = '<ul style="list-style: none;padding-left: 10px">';
+        if (count($blogs) === 0)
+        {
+            $output .= '<li class="search-element">'.__('blog.data_not_found').'</li>';
+        }
+        else
+        {
+            if (\app()->getLocale() == 'az')
+            {
+                foreach ($blogs as $blog)
+                {
+                    $output .= '<li class="search-element"><a href="'.route('front.single.blog',$blog->slug_az).'"><img style="width:35px;height:35px" src="'.asset('storage/blog-covers/'.$blog->photo).'" /> '.$blog->title_az.'</a></li>';
+                }
+            }
+            else
+            {
+                foreach ($blogs as $blog)
+                {
+                    $output .= '<li class="search-element"><a href="'.route('front.single.blog',$blog->slug_en).'"><img style="width:35px;height:35px" src="'.asset('storage/blog-covers/'.$blog->photo).'" /> '.$blog->title_en.'</a></li>';
+                }
+            }
+        }
+        $output .= '</ul>';
+
+        return $output;
     }
 }

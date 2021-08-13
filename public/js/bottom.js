@@ -18,7 +18,7 @@ $(document).ready(function () {
     {
         var link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = './css/bottom.css';
+        link.href = $('#bottomUrl').val();
         document.head.appendChild(link);
     }
 });

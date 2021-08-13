@@ -15,4 +15,9 @@ class TagBlogCenter extends Model
         'blog_id',
         'tag_id'
     ];
+
+    public function getTag()
+    {
+        return $this->hasOne(Tag::class,'id','tag_id');
+    }
 }

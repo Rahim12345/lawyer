@@ -28,6 +28,18 @@ Route::get( 'logout', [ loginController::class, 'logout' ] )
 Route::get('/',[ homeController::class,'index' ])
     ->name('front.home');
 
+Route::get('blog', [ blogController::class,'frontIndex'] )
+    ->name('front.blog');
+
+Route::get('blog/{slug}', [ blogController::class,'frontSingle'] )
+    ->name('front.single.blog');
+
+Route::get('category/{slug}', [ blogController::class,'Category'] )
+    ->name('front.category');
+
+Route::get('tag/{slug}', [ blogController::class,'Tag'] )
+    ->name('front.tag');
+
 Route::get('contact', [ contactController::class,'index'] )
     ->name('front.contact');
 
@@ -36,6 +48,9 @@ Route::post('subscribe', [ contactController::class,'subscribe'] )
 
 Route::post('contact-submittion', [ contactController::class,'sendEmail'] )
     ->name('front.contact.store');
+
+Route::post('search', [ blogController::class,'Search'] )
+    ->name('front.search');
 
 Route::get('attorneys', [ vekilController::class,'vekiller'] )
     ->name('front.attorneys');

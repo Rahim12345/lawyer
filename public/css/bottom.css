@@ -43,3 +43,7 @@ will-change:transform;
      flex-direction:column;
  }
 }
+
+.bottom-menu {
+    cursor: pointer;
+}
