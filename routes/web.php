@@ -52,6 +52,12 @@ Route::post('contact-submittion', [ contactController::class,'sendEmail'] )
 Route::post('search', [ blogController::class,'Search'] )
     ->name('front.search');
 
+Route::post('comment', [ blogController::class,'Comment'] )
+    ->name('front.comment');
+
+Route::post('load-comments', [ blogController::class,'loadComment'] )
+    ->name('front.load.comments');
+
 Route::get('attorneys', [ vekilController::class,'vekiller'] )
     ->name('front.attorneys');
 

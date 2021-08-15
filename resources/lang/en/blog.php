@@ -7,6 +7,7 @@ return [
     'categories'=>'Categories',
     'search'=>'Search',
     'data_not_found'=>'Data not found',
-    'leave_a_reply'=>'Leave a Reply',
-    'post_comment'=>'POST COMMENT'
+    'leave_a_reply'=>'Leave a Comment',
+    'post_comment'=>'POST COMMENT',
+    'comments'=>'Comments'
 ];

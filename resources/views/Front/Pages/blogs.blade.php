@@ -1,7 +1,7 @@
 @extends('Front.Layout.master')
 
 @section('title')
-{{ __('blog.blogs') }}
+    - {{ __('blog.blogs') }}
 @endsection
 
 @section('css')
@@ -27,13 +27,19 @@
                                         <div class="blog-one__date"><span>{{ \Carbon\Carbon::parse($blog->updated_at)->format('d') }}</span>{{ explode(' ',\Carbon\Carbon::parse($blog->updated_at)->formatLocalized('%d %b %Y'))[1] }}</div><!-- /.blog-one__date -->
                                         <div class="blog-one__meta">
                                             <a href="javascript: void(0)">Sanan Suleymanli</a>
-                                            <a href="javascript: void(0)">Comments (4)</a>
+                                            <a href="javascript: void(0)">{{ __('blog.comments') }} ({{ count($blog->getComments) }})</a>
                                         </div><!-- /.blog-one__meta -->
                                         <h3 class="blog-one__title"><a href="{{ route('front.single.blog',$blog->slug_az) }}">{{ $blog->title_az }}</a></h3><!-- /.blog-one__title -->
                                     {!! mb_substr($blog->blog_az,0,200) !!}<!-- /.blog-one__text -->
                                         <div class="blog-one__bottom">
                                             <a class="blog-one__link" href="{{ route('front.single.blog',$blog->slug_az) }}"><span>{{ __('blog.more_details') }}</span> <i class="fas fa-long-arrow-alt-right"></i></a>
-                                            <a href="{{ route('front.single.blog',$blog->slug_az) }}" class="blog-one__share"><i class="fa fa-share-alt"></i><span class="text-uppercase">{{ __('blog.share_this') }}</span></a>
+                                            <a onclick="
+                                                let url = '{!! route('front.single.blog',$blog->slug_az) !!}';
+                                                window.open(
+                                                'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url),
+                                                'facebook-share-dialog',
+                                                'width=626,height=436');
+                                                return false;" class="blog-one__share"><i class="fa fa-share-alt"></i><span class="text-uppercase">{{ __('blog.share_this') }}</span></a>
                                         </div><!-- /.blog-one__bottom -->
                                         <br>
                                         @foreach($blog->getTags as $tag)
@@ -53,13 +59,19 @@
                                         <div class="blog-one__date"><span>{{ \Carbon\Carbon::parse($blog->updated_at)->format('d') }}</span>{{ explode(' ',\Carbon\Carbon::parse($blog->updated_at)->formatLocalized('%d %b %Y'))[1] }}</div><!-- /.blog-one__date -->
                                         <div class="blog-one__meta">
                                             <a href="javascript: void(0)">Sanan Suleymanli</a>
-                                            <a href="javascript: void(0)">Comments (4)</a>
+                                            <a href="javascript: void(0)">{{ __('blog.comments') }} ({{ count($blog->getComments) }})</a>
                                         </div><!-- /.blog-one__meta -->
                                         <h3 class="blog-one__title"><a href="{{ route('front.single.blog',$blog->slug_en) }}">{{ $blog->title_en }}</a></h3><!-- /.blog-one__title -->
                                     {!! mb_substr($blog->blog_en,0,200) !!}<!-- /.blog-one__text -->
                                         <div class="blog-one__bottom">
                                             <a class="blog-one__link" href="{{ route('front.single.blog',$blog->slug_en) }}"><span>{{ __('blog.more_details') }}</span> <i class="fas fa-long-arrow-alt-right"></i></a>
-                                            <a href="{{ route('front.single.blog',$blog->slug_en) }}" class="blog-one__share"><i class="fa fa-share-alt"></i><span class="text-uppercase">{{ __('blog.share_this') }}</span></a>
+                                            <a onclick="
+                                                let url = '{!! route('front.single.blog',$blog->slug_en) !!}';
+                                                window.open(
+                                                'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(url),
+                                                'facebook-share-dialog',
+                                                'width=626,height=436');
+                                                return false;" class="blog-one__share"><i class="fa fa-share-alt"></i><span class="text-uppercase">{{ __('blog.share_this') }}</span></a>
                                         </div><!-- /.blog-one__bottom -->
                                         <br>
                                         @foreach($blog->getTags as $tag)

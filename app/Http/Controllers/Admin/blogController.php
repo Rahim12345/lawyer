@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Tag;
 use App\Models\TagBlogCenter;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
@@ -504,5 +506,97 @@ class blogController extends Controller
         $output .= '</ul>';
 
         return $output;
+    }
+
+    public function Comment(Request $request)
+    {
+        // call curl to POST request
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('secret' => env('RECAPTCHA_SITE_SECRET'), 'response' => $request->token)));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $arrResponse = json_decode($response, true);
+
+        if($arrResponse["success"] == '1' && $arrResponse["action"] == 'comment' && $arrResponse["score"] >= 0.5)
+        {
+            App::setLocale(Cookie::get('lang'));
+            $this->validate($request,[
+                'comment_name'=>['required','max:30'],
+                'comment_email'=>['required','email'],
+                'comment_message'=>'required|max:5000',
+                'id'=>['required',Rule::in(Blog::where('show',1)->pluck('id')->toArray())],
+            ],[],[
+                'comment_name'=>__('front_master.your_name'),
+                'comment_email'=>__('login.email'),
+                'comment_message'=>__('front_master.message')
+            ]);
+
+            Comment::create([
+                'name'=>$request->comment_name,
+                'email'=>$request->comment_email,
+                'message'=>$request->comment_message,
+                'blog_id'=>$request->id
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'errors'=>[
+                    'recaptcha' => 'Google thinks you are a bot'
+                ]
+            ],422);
+        }
+    }
+
+    public function loadComment(Request $request)
+    {
+        App::setLocale(Cookie::get('lang'));
+        $this->validate($request,[
+            'blogID'=>['required', Rule::in(Blog::pluck('id')->toArray())]
+        ]);
+
+        $comments = Comment::where('blog_id',$request->blogID)->get();
+        $output = '';
+        $count  = 0;
+        if (count($comments) === 0)
+        {
+            $count = 0;
+            $output .= '<h3 class="blog-details__block-title">'.__('blog.comments').' ('.$count.')</h3>';
+        }
+        else
+        {
+            $count = count($comments);
+            $output .= '<h3 class="blog-details__block-title">'.__('blog.comments').' ('.$count.')</h3>';
+            foreach ($comments as $comment)
+            {
+                $output .= '
+                    <div class="comment-one__single">
+                        <div class="comment-one__image">
+                            <div class="comment-one__image-inner">
+                                <img src="'.asset('assets/avatar/user.png').'" alt="Awesome Image" />
+                            </div>
+                        </div>
+                        <div class="comment-one__content">
+                            <h4 class="comment-one__title">'.$comment->name.'</h4>
+                            <div class="comment-one__meta">
+                                <a href="javascript: voud(0)">'.Carbon::parse($comment->updated_at)->toFormattedDateString().'</a>
+                                <a href="javascript: voud(0)">'.explode(' ',Carbon::parse($comment->updated_at)->format('d-m-Y H:i'))[1].'</a>
+                            </div>
+                            <div class="comment-one__text">
+                                '.$comment->message.'
+                            </div>
+                        </div>
+                    </div>
+                ';
+            }
+        }
+
+        return response()->json([
+            'count'=>$count,
+            'output'=>$output
+        ]);
     }
 }

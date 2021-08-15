@@ -7,6 +7,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="title" content="@yield('meta_title',__('meta.title'))">
+    <meta name="description" content="@yield('meta_description',__('meta.description'))">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="@yield('meta_url',url()->current())">
+    <meta property="og:title" content="@yield('meta_og_title',__('meta.title'))">
+    <meta property="og:description" content="@yield('meta_og_description',__('meta.description'))">
+    <meta property="og:image" content="@yield('meta_og_image','')">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="@yield('meta_twitter_url',url()->current())">
+    <meta property="twitter:title" content="@yield('meta_twitter_title',__('meta.title'))">
+    <meta property="twitter:description" content="@yield('meta_twitter_description',__('meta.description'))">
+    <meta property="twitter:image" content="@yield('meta_twitter_image','')">
+
     <title>{{ config('app.name') }} @yield('title')</title>
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/front') }}/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/front') }}/images/favicon/favicon-32x32.png">
@@ -20,7 +36,6 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#e0a965">
     <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/animate.css">
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/bootstrap-datepicker.min.css">
@@ -35,7 +50,6 @@
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/nouislider.pips.css">
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/jquery.bootstrap-touchspin.min.css">
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/jquery.mCustomScrollbar.min.css">
-
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('assets/front') }}/css/responsive.css">
 
@@ -63,6 +77,10 @@
     </div><!-- /.topbar-two -->
     <input type="hidden" id="bottomUrl" value="{{ asset('css/bottom.css') }}">
     <input type="hidden" id="searchUrl" value="{{ route('front.search') }}">
+    <input type="hidden" id="commentUrl" value="{{ route('front.comment') }}">
+    <input type="hidden" id="loadCommentsUrl" value="{{ route('front.load.comments') }}">
+    <input type="hidden" id="re-key" value="{{env('RECAPTCHA_SITE_KEY')}}">
+    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
     <header class="site-header site-header__header-two  ">
         <nav class="navbar navbar-expand-lg navbar-light header-navigation stricky">
             <div class="container clearfix">
@@ -99,14 +117,13 @@
                             <a href="{{ route('front.contact') }}">{{ __('front_master.contact') }}</a>
                         </li>
                         <li>
-                        <div class="d-lg-block d-none dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink78" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 16px;font-weight: bold;color: #333333">{{ __('front_master.lang') }}</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink78">
-                                <a class="dropdown-item" href="{{ route('front.lang','az') }}"><span class="flag-icon flag-icon-az"></span> AZ</a>
-                                <a class="dropdown-item" href="{{ route('front.lang','en') }}"><span class="flag-icon flag-icon-gb"></span> EN</a>
-                                <a class="dropdown-item" href="{{ route('front.lang','fr') }}"><span class="flag-icon flag-icon-fr"></span> FR</a>
+                            <div class="d-lg-block d-none dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink78" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 16px;font-weight: bold;color: #333333">{{ __('front_master.lang') }}</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink78">
+                                    <a class="dropdown-item" href="{{ route('front.lang','az') }}"><span class="flag-icon flag-icon-az"></span> AZ</a>
+                                    <a class="dropdown-item" href="{{ route('front.lang','en') }}"><span class="flag-icon flag-icon-gb"></span> EN</a>
+                                </div>
                             </div>
-                        </div>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -159,28 +176,29 @@
                 </div><!-- /.col-lg-4 -->
                 <div class="col-xl-2 col-lg-6">
                     <div class="footer-widget">
-                        <h3 class="footer-widget__title">Practice Areas</h3><!-- /.footer-widget__title -->
+                        <h3 style="font-family: Arial" class="footer-widget__title">{{ __('front_master.services') }}</h3><!-- /.footer-widget__title -->
                         <ul class="footer-widget__links list-unstyled">
-                            <li><a href="#">Real Estate Laws</a></li>
-                            <li><a href="#">Personal Injury</a></li>
-                            <li><a href="#">Criminal Laws</a></li>
-                            <li><a href="#">Health & Insurance</a></li>
-                            <li><a href="#">Domestic Voilance</a></li>
-                            <li><a href="#">Fraud & Theft</a></li>
-                            <li><a href="#">Transportation Laws</a></li>
+                            @if(app()->getLocale() == 'az')
+                                @foreach($services as $service)
+                                    <li><a href="{{ route('front.services') }}">{{ $service->service_name_az }}</a></li>
+                                @endforeach
+                            @else
+                                @foreach($services as $service)
+                                    <li><a href="{{ route('front.services') }}">{{ $service->service_name_en }}</a></li>
+                                @endforeach
+                            @endif
                         </ul><!-- /.footer-widget__links -->
                     </div><!-- /.footer-widget -->
                 </div><!-- /.col-lg-2 -->
                 <div class="col-xl-3 col-lg-6">
                     <div class="footer-widget footer-widget__quick-link">
-                        <h3 class="footer-widget__title">Quick Links</h3><!-- /.footer-widget__title -->
+                        <h3 style="font-family: Arial" class="footer-widget__title">{{ __('front_master.quick_links') }}</h3><!-- /.footer-widget__title -->
                         <ul class="footer-widget__links list-unstyled">
-                            <li><a href="#">About Law Firm</a></li>
-                            <li><a href="#">Our Attorneys</a></li>
-                            <li><a href="#">Recent cases</a></li>
-                            <li><a href="#">Contact us</a></li>
-                            <li><a href="#">Book Appointment</a></li>
-                            <li><a href="#">Latest News</a></li>
+                            <li><a href="{{ route('front.about') }}">{{  __('front_master.about') }}</a></li>
+                            <li><a href="{{ route('front.attorneys') }}">{{ __('front_master.attorneys') }}</a></li>
+                            <li><a href="{{ route('front.contact') }}">{{ __('front_master.contact') }}</a></li>
+                            <li id="appointmentLi"><a href="javascript:void (0)" style="text-transform: capitalize">{{ __('front_master.book_an_appointment') }}</a></li>
+                            <li><a href="{{ route('front.blog') }}">{{ __('blog.blogs') }}</a></li>
                         </ul><!-- /.footer-widget__links -->
                     </div><!-- /.footer-widget -->
                 </div><!-- /.col-lg-3 -->
@@ -284,59 +302,61 @@
 <script src="{{ asset('assets/front') }}/js/theme.js"></script>
 <script src="https://www.google.com/recaptcha/api.js?render=6LfkLJ8bAAAAAIXkFeSJbKX8pn1ZdpW5Ec44UtSo"></script>
 <script>
-$(document).ready(function () {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-    $('#mc-email').keyup(function (event) {
-        if (event.keyCode === 13)
-        {
-            $('#mc-btn').click();
-        }
-    });
+        $('#mc-email').keyup(function (event) {
+            if (event.keyCode === 13)
+            {
+                $('#mc-btn').click();
+            }
+        });
 
-    $('#mc-btn').click(function () {
-        $('#subscribe-error').html('');
-        $('#mc-btn').prop('disabled',true);
-        grecaptcha.ready(function () {
-            grecaptcha.execute('6LfkLJ8bAAAAAIXkFeSJbKX8pn1ZdpW5Ec44UtSo', { action: 'subscribe' }).then(function (token) {
-                var recaptchaResponse = document.getElementById('recaptchaResponse');
-                recaptchaResponse.value = token;
+        $('#mc-btn').click(function () {
+            $('#subscribe-error').html('');
+            $('#mc-btn').prop('disabled',true);
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LfkLJ8bAAAAAIXkFeSJbKX8pn1ZdpW5Ec44UtSo', { action: 'subscribe' }).then(function (token) {
+                    var recaptchaResponse = document.getElementById('recaptchaResponse');
+                    recaptchaResponse.value = token;
 
-                let email           = $('#mc-email').val().trim();
-                let recaptcha       = $('#recaptchaResponse').val().trim();
-                let action          = 'subscribe';
-                $.ajax({
-                    type : 'POST',
-                    data : {email,recaptcha,action},
-                    url  : '{!! route('front.subscribe') !!}',
-                    success : function (response) {
-                        if (response == 'true')
-                        {
-                            $('#subscribe-error').html('').html('You have been subscribed successfully');
-                            $('#mc-btn').prop('disabled',true);
+                    let email           = $('#mc-email').val().trim();
+                    let recaptcha       = $('#recaptchaResponse').val().trim();
+                    let action          = 'subscribe';
+                    $.ajax({
+                        type : 'POST',
+                        data : {email,recaptcha,action},
+                        url  : '{!! route('front.subscribe') !!}',
+                        success : function (response) {
+                            if (response == 'true')
+                            {
+                                $('#subscribe-error').html('').html('You have been subscribed successfully');
+                                $('#mc-btn').prop('disabled',true);
+                            }
+                        },
+                        error   : function (myErrors) {
+                            $.each(myErrors.responseJSON.errors,function (key, item) {
+                                $('#subscribe-error').html('').html(item);
+                            })
+                            $('#mc-btn').prop('disabled',false);
                         }
-                    },
-                    error   : function (myErrors) {
-                        $.each(myErrors.responseJSON.errors,function (key, item) {
-                            $('#subscribe-error').html('').html(item);
-                        })
-                        $('#mc-btn').prop('disabled',false);
-                    }
+                    });
                 });
             });
         });
     });
-});
 </script>
 <script src="{{ asset('js/bottom.js') }}"></script>
 <script src="{{ asset('js/search.js') }}"></script>
+<script src="{{ asset('js/appointmentFocus.js') }}"></script>
 @toastr_js
 @toastr_render
 @yield('js')
+
 </body>
 
 </html>

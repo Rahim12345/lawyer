@@ -27,5 +27,7 @@ return [
     'get_appointment'=>'Bu gün randevu alın!',
     'quick_help'=>'Zəng edin',
     'live_support'=>'canlı dəstək',
-    'lang'=>'Dillər'
+    'lang'=>'Dillər',
+    'view_all_blogs'=>'BÜTÜN BLOGLAR',
+    'quick_links'=>'Sürətli Bağlantılar'
 ];

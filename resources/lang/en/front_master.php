@@ -28,4 +28,6 @@ return [
     'quick_help'=>'Call us for a quick help!',
     'live_support'=>'live support',
     'lang'=>'Languages',
+    'view_all_blogs'=>'VIEW ALL BLOGS',
+    'quick_links'=>'Quick Links'
 ];

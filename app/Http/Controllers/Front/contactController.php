@@ -67,6 +67,8 @@ class contactController extends Controller
         App::setLocale(Cookie::get('lang'));
         $this->validate($request,[
            'email'=>'required|email|unique:subscribes,email'
+        ],[],[
+            'email'=>'Email'
         ]);
 
         $ch = curl_init();
