@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Evaluation;
 use Illuminate\Http\Request;
 
 class notificationsController extends Controller
@@ -15,9 +16,17 @@ class notificationsController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($type,$id)
     {
-        $notification = Contact::whereId($id)->first();
+        if ($type == 'contact')
+        {
+            $notification = Contact::whereId($id)->first();
+        }
+        else
+        {
+            $notification = Evaluation::whereId($id)->first();
+        }
+
         if ($notification === null)
         {
             toastr()->error(__('admin_contact.data_not_found'),__('admin_contact.error'));
@@ -25,10 +34,20 @@ class notificationsController extends Controller
         }
         else
         {
-            Contact::whereId($id)->update([
-               'read_unread'=>1
-            ]);
+            if ($type == 'contact')
+            {
+                Contact::whereId($id)->update([
+                    'read_unread'=>1
+                ]);
+            }
+            else
+            {
+                Evaluation::whereId($id)->update([
+                    'read_unread'=>1
+                ]);
+            }
             return view('Admin.Pages.single-notification',[
+                'type'=>$type,
                 'notification'=>$notification
             ]);
         }

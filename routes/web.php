@@ -81,7 +81,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
     Route::get('notifications/{slug}', [ notificationsController::class,'index'] )
         ->name('admin.notifications');
 
-    Route::get('single-notification/{id}', [ notificationsController::class,'show'] )
+    Route::get('single-notification/{type}/{id}', [ notificationsController::class,'show'] )
         ->name('admin.notification.show');
 
     Route::get('subscribers',[subsciberController::class,'index'])
