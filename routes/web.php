@@ -78,6 +78,12 @@ Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
     Route::get('dashboard', [ dashboardController::class,'index'] )
         ->name('admin.dashboard');
 
+    Route::get('profile',[loginController::class,'profile'])
+        ->name('admin.profile');
+
+    Route::post('profile',[loginController::class,'profileUpdate'])
+        ->name('admin.profile.update');
+
     Route::get('settings', [ settingController::class,'index'] )
         ->name('admin.settings');
 

@@ -1,7 +1,7 @@
 @extends('Admin.Layout.master')
 
 @section('title')
-{{ __('admin_master.notifications') }}
+    {{ __('admin_master.notifications') }}
 @endsection
 
 @section('css')
@@ -36,7 +36,7 @@
                                                         <div class="col">
                                                             <div class="text-truncate">
                                                                 <strong>{{ $notification->name }}</strong> wrote message from Contact form <a
-                                                                    href="{{ route('admin.notification.show',$notification->id) }}"><strong>"{{ $notification->subject }}"</strong></a> ...
+                                                                    href="{{ route('admin.notification.show',['type'=>'contact','id'=>$notification->id]) }}"><strong>"{{ $notification->subject }}"</strong></a> ...
                                                             </div>
                                                             <div class="text-muted">{{ \Carbon\Carbon::parse($notification->created_at)->toFormattedDateString() }}</div>
                                                         </div>
@@ -56,7 +56,7 @@
                                                         <div class="col">
                                                             <div class="text-truncate">
                                                                 <strong>{{ $evaluation->name }}</strong> wrote message from Free Case Evaluation form <a
-                                                                    href="{{ route('admin.notification.show',$evaluation->id) }}"><strong>"{{ $evaluation->getService->service_name_en }}"</strong></a> ...
+                                                                    href="{{ route('admin.notification.show',['type'=>'evaluation','id'=>$evaluation->id]) }}"><strong>"{{ $evaluation->getService->service_name_en }}"</strong></a> ...
                                                             </div>
                                                             <div class="text-muted">{{ \Carbon\Carbon::parse($evaluation->created_at)->toFormattedDateString() }}</div>
                                                         </div>

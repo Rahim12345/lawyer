@@ -38,7 +38,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <a href="#" class="dropdown-item">{{ __('admin_master.profile_and_account') }}</a>
+                        <a href="{{ route('admin.profile') }}" class="dropdown-item">{{ __('admin_master.profile_and_account') }}</a>
                         <a href="{{ route('admin.notifications',['slug'=>'contact-notifications']) }}" class="dropdown-item">{{ __('admin_master.notifications') }} - &nbsp;<span class="badge bg-red float-right">{{ $notification_count }}</span></a>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('logout') }}" class="dropdown-item">{{ __('admin_master.logout') }}</a>
@@ -136,7 +136,7 @@
     </div>
     <div class="content">
         <div class="container-xl d-flex flex-column justify-content-center">
-@yield('content')
+            @yield('content')
         </div>
         <footer class="footer footer-transparent d-print-none">
             <div class="container">

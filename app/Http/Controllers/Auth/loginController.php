@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\loginRequest;
+use App\Http\Requests\profileUpdate;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -83,5 +84,34 @@ class loginController extends Controller
         auth()->logout();
 
         return redirect()->route( 'login' );
+    }
+
+    public function profile()
+    {
+        $user = User::whereId(auth()->user()->id)->first();
+        return view('Admin.Pages.profile',[
+            'user'=>$user
+        ]);
+    }
+
+    public function profileUpdate(profileUpdate $request)
+    {
+        $user = User::whereId(auth()->user()->id)->first();
+        if (password_verify($request->old_password,$user->password))
+        {
+            User::whereId(auth()->user()->id)->update([
+                'email'=>$request->email,
+                'name'=>$request->name,
+                'password'=>bcrypt($request->new_password)
+            ]);
+
+            toastr()->success('Hesab uğurla redaktə edildi','Uğurlu əməliyyat');
+            return redirect()->route('logout');
+        }
+        else
+        {
+            toastr()->error('Köhnə şifrə yanlışdır','Xəta');
+            return redirect()->back();
+        }
     }
 }
