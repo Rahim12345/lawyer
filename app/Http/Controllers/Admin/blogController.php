@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
+use Ladumor\OneSignal\OneSignal;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Yajra\DataTables\DataTables;
 
@@ -129,6 +130,15 @@ class blogController extends Controller
                 'tag_id'=>$tag
             ]);
         }
+
+        $fields['include_player_ids'] = array_column(OneSignal::getDevices()['players'], 'id');
+        $fields['contents'] = array(
+            "en" => $request->title_en,
+        );
+
+        $fields['chrome_web_image'] = asset('storage/blog-covers/'.$new_name);
+        $fields['url'] = route('front.single.blog',str_slug($request->title_en));
+        OneSignal::sendPush($fields);
     }
 
     /**
@@ -292,6 +302,15 @@ class blogController extends Controller
             'blog_az'=>$request->blog_az,
             'blog_en'=>$request->blog_en
         ]);
+
+        $fields['include_player_ids'] = array_column(OneSignal::getDevices()['players'], 'id');
+        $fields['contents'] = array(
+            "en" => $request->title_en,
+        );
+
+        $fields['chrome_web_image'] = asset('storage/blog-covers/'.$new_name);
+        $fields['url'] = route('front.single.blog',str_slug($request->title_en));
+        OneSignal::sendPush($fields);
     }
 
     public function myDelete($id)

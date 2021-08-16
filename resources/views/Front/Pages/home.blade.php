@@ -1,7 +1,7 @@
 @extends('Front.Layout.master')
 
 @section('title')
- | Home
+    - {{ __('front_master.home') }}
 @endsection
 
 @section('css')
@@ -369,63 +369,70 @@
         </div><!-- /.container -->
     </section><!-- /.testimonials-two -->
 
-    <section class="blog-one blog-one__home-two">
-        <div class="container">
-            <div class="block-title text-center">
-                <h3 class="block-title__title">What’s Happening</h3><!-- /.block-title__title -->
-                <p class="block-title__text-two">Sunt officia deserunt animd laborum perspicial</p><!-- /.block-title__text-one -->
-            </div><!-- /.block-title -->
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="blog-one__single">
-                        <div class="blog-one__image">
-                            <div class="blog-one__image-inner">
-                                <img src="{{ asset('assets/front') }}/images/blog/blog-1-1.jpg" alt="Awesome Image" />
-                                <a href="blog-post.html" class="blog-one__image-link"><i class="fa fa-link"></i></a>
-                            </div><!-- /.blog-one__image-inner -->
-                        </div><!-- /.blog-one__image -->
-                        <div class="blog-one__content">
-                            <div class="blog-one__meta">
-                                <a href="blog-post.html">Sam benson</a>
-                                <a href="blog-post.html">Immigration</a>
-                            </div><!-- /.blog-one__meta -->
-                            <h3 class="blog-one__title"><a href="blog-post.html">Tips for the Security Regulators The ‘Inside Story’</a></h3><!-- /.blog-one__title -->
-                            <p class="blog-one__text">Miventore veritatis et quasi architec beat vitae dicta sunt explicabo nem enim cone quuntur magni dolores eos.</p><!-- /.blog-one__text -->
-                            <div class="blog-one__bottom">
-                                <a class="blog-one__link" href="blog-post.html"><span>More Details</span> <i class="fas fa-long-arrow-alt-right"></i></a>
-                                <a href="blog-post.html" class="blog-one__share"><i class="fa fa-share-alt"></i></a>
-                            </div><!-- /.blog-one__bottom -->
-                        </div><!-- /.blog-one__content -->
-                    </div><!-- /.blog-one__single -->
-                </div><!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="blog-one__single">
-                        <div class="blog-one__image">
-                            <div class="blog-one__image-inner">
-                                <img src="{{ asset('assets/front') }}/images/blog/blog-1-2.jpg" alt="Awesome Image" />
-                                <a href="blog-post.html" class="blog-one__image-link"><i class="fa fa-link"></i></a>
-                            </div><!-- /.blog-one__image-inner -->
-                        </div><!-- /.blog-one__image -->
-                        <div class="blog-one__content">
-                            <div class="blog-one__meta">
-                                <a href="blog-post.html">Sam benson</a>
-                                <a href="blog-post.html">Immigration</a>
-                            </div><!-- /.blog-one__meta -->
-                            <h3 class="blog-one__title"><a href="blog-post.html">Tips for the Security Regulators The ‘Inside Story’</a></h3><!-- /.blog-one__title -->
-                            <p class="blog-one__text">Miventore veritatis et quasi architec beat vitae dicta sunt explicabo nem enim cone quuntur magni dolores eos.</p><!-- /.blog-one__text -->
-                            <div class="blog-one__bottom">
-                                <a class="blog-one__link" href="blog-post.html"><span>More Details</span> <i class="fas fa-long-arrow-alt-right"></i></a>
-                                <a href="blog-post.html" class="blog-one__share"><i class="fa fa-share-alt"></i></a>
-                            </div><!-- /.blog-one__bottom -->
-                        </div><!-- /.blog-one__content -->
-                    </div><!-- /.blog-one__single -->
-                </div><!-- /.col-lg-6 -->
-            </div><!-- /.row -->
-            <div class="blog-one__more-block text-center">
-                <a href="blog-grid.html" class="thm-btn blog-one__more-btn">view all news <i class="fas fa-long-arrow-alt-right"></i></a>
-            </div><!-- /.blog-one__more-block -->
-        </div><!-- /.container -->
-    </section><!-- /.blog-one -->
+    @if(count($latest_blogs) > 0)
+        <section class="blog-one blog-one__home-two">
+            <div class="container">
+                <div class="block-title text-center">
+                    <h3 class="block-title__title">What’s Happening</h3><!-- /.block-title__title -->
+                    <p class="block-title__text-two">Sunt officia deserunt animd laborum perspicial</p><!-- /.block-title__text-one -->
+                </div><!-- /.block-title -->
+                <div class="row">
+                    @if(app()->getLocale() == 'az')
+                        @foreach($latest_blogs as $blog)
+                            <div class="col-lg-6">
+                                <div class="blog-one__single">
+                                    <div class="blog-one__image">
+                                        <div class="blog-one__image-inner">
+                                            <img src="{{ asset('storage/blog-covers/'.$blog->photo) }}" alt="{{ $blog->title_az }}" />
+                                            <a href="{{ route('front.single.blog',$blog->slug_az) }}" class="blog-one__image-link"><i class="fa fa-link"></i></a>
+                                        </div><!-- /.blog-one__image-inner -->
+                                    </div><!-- /.blog-one__image -->
+                                    <div class="blog-one__content">
+                                        <div class="blog-one__meta">
+                                            <a href="{{ route('front.single.blog',$blog->slug_az) }}">Sanan Suleymanli</a>
+                                        </div><!-- /.blog-one__meta -->
+                                        <h3 class="blog-one__title"><a href="{{ route('front.single.blog',$blog->slug_az) }}">{{ $blog->title_az }}</a></h3><!-- /.blog-one__title -->
+                                        {!! substr($blog->title_az,0,50) !!}
+                                        <div class="blog-one__bottom">
+                                            <a class="blog-one__link" href="{{ route('front.single.blog',$blog->slug_az) }}"><span>{{ __('front_service.more_details') }}</span> <i class="fas fa-long-arrow-alt-right"></i></a>
+                                            <a href="{{ route('front.single.blog',$blog->slug_az) }}" class="blog-one__share"></a>
+                                        </div><!-- /.blog-one__bottom -->
+                                    </div><!-- /.blog-one__content -->
+                                </div><!-- /.blog-one__single -->
+                            </div><!-- /.col-lg-6 -->
+                        @endforeach
+                    @else
+                        @foreach($latest_blogs as $blog)
+                            <div class="col-lg-6">
+                                <div class="blog-one__single">
+                                    <div class="blog-one__image">
+                                        <div class="blog-one__image-inner">
+                                            <img src="{{ asset('storage/blog-covers/'.$blog->photo) }}" alt="{{ $blog->title_az }}" />
+                                            <a href="{{ route('front.single.blog',$blog->slug_en) }}" class="blog-one__image-link"><i class="fa fa-link"></i></a>
+                                        </div><!-- /.blog-one__image-inner -->
+                                    </div><!-- /.blog-one__image -->
+                                    <div class="blog-one__content">
+                                        <div class="blog-one__meta">
+                                            <a href="{{ route('front.single.blog',$blog->slug_en) }}">Sanan Suleymanli</a>
+                                        </div><!-- /.blog-one__meta -->
+                                        <h3 class="blog-one__title"><a href="{{ route('front.single.blog',$blog->slug_en) }}">{{ $blog->title_en }}</a></h3><!-- /.blog-one__title -->
+                                        {!! substr($blog->title_en,0,50) !!}
+                                        <div class="blog-one__bottom">
+                                            <a class="blog-one__link" href="{{ route('front.single.blog',$blog->slug_en) }}"><span>{{ __('front_service.more_details') }}</span> <i class="fas fa-long-arrow-alt-right"></i></a>
+                                            <a href="{{ route('front.single.blog',$blog->slug_en) }}" class="blog-one__share"></a>
+                                        </div><!-- /.blog-one__bottom -->
+                                    </div><!-- /.blog-one__content -->
+                                </div><!-- /.blog-one__single -->
+                            </div><!-- /.col-lg-6 -->
+                        @endforeach
+                    @endif
+                </div><!-- /.row -->
+                <div class="blog-one__more-block text-center">
+                    <a href="{{ route('front.blog') }}" class="thm-btn blog-one__more-btn">{{ __('front_master.view_all_blogs') }} <i class="fas fa-long-arrow-alt-right"></i></a>
+                </div><!-- /.blog-one__more-block -->
+            </div><!-- /.container -->
+        </section><!-- /.blog-one -->
+    @endif
 @endsection
 
 @section('js')

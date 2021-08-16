@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attorney;
+use App\Models\Blog;
 use App\Models\Service;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 
@@ -16,7 +16,8 @@ class homeController extends Controller
         App::setLocale(Cookie::get('lang'));
         return view('Front.Pages.home',[
             'attorneys'=>Attorney::all(),
-            'services'=>Service::all()
+            'services'=>Service::all(),
+            'latest_blogs'=>Blog::orderBy('id','desc')->take(2)->get()
         ]);
     }
 

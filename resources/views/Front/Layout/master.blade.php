@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -56,6 +56,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/search.css') }}">
 
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: "d5253539-78d1-47dc-9130-0e4e2e53c3dd",
+            });
+        });
+    </script>
     @toastr_css
     @yield('css')
 </head>
@@ -95,7 +104,7 @@
                 </div><!-- /.logo-box -->
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="main-navigation">
-                    <ul class=" navigation-box ">
+                    <ul class=" navigation-box">
                         <li {{ \Illuminate\Support\Facades\Route::currentRouteName() == 'front.home' ? "class=current" : '' }}>
                             <a href="{{ route('front.home') }}">{{ __('front_master.home') }}</a>
                         </li>
@@ -127,9 +136,7 @@
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
-                <div class="right-side-box">
-                    <a href="#" class="header__sidebar-toggler  side-menu__toggler"><i class="fas fa-bars"></i></a>
-                </div><!-- /.right-side-box -->
+
             </div>
             <!-- /.container -->
         </nav>
@@ -197,7 +204,7 @@
                             <li><a href="{{ route('front.about') }}">{{  __('front_master.about') }}</a></li>
                             <li><a href="{{ route('front.attorneys') }}">{{ __('front_master.attorneys') }}</a></li>
                             <li><a href="{{ route('front.contact') }}">{{ __('front_master.contact') }}</a></li>
-                            <li id="appointmentLi"><a href="javascript:void (0)" style="text-transform: capitalize">{{ __('front_master.book_an_appointment') }}</a></li>
+                            <li id="appointmentLi"><a href="javascript:void (0)">{{ __('front_master.book_an_appointment') }}</a></li>
                             <li><a href="{{ route('front.blog') }}">{{ __('blog.blogs') }}</a></li>
                         </ul><!-- /.footer-widget__links -->
                     </div><!-- /.footer-widget -->

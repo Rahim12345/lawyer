@@ -65,7 +65,7 @@
                                     <div class="blog-one__date"><span>{{ \Carbon\Carbon::parse($blog->updated_at)->format('d') }}</span>{{ explode(' ',\Carbon\Carbon::parse($blog->updated_at)->formatLocalized('%d %b %Y'))[1] }}</div><!-- /.blog-one__date -->
                                     <div class="blog-one__meta">
                                         <a href="javascript: void(0)">Sanan Suleymanli</a>
-                                        <a href="javascript: void(0)">Comments (4)</a>
+                                        <a href="javascript: void(0)" id="countComment"></a>
                                     </div><!-- /.blog-one__meta -->
                                     <h3 class="blog-one__title">{{ $blog->title_en }}</h3><!-- /.blog-one__title -->
                                     {!! $blog->blog_en !!}

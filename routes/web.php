@@ -13,7 +13,10 @@ use App\Http\Controllers\Front\contactController;
 use App\Http\Controllers\Front\homeController;
 use App\Http\Controllers\settingController;
 use App\Http\Controllers\tagController;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
+use Ladumor\OneSignal\OneSignal;
 
 Route::get( '/login', [ loginController::class, 'login' ] )
     ->name( 'login' );
@@ -72,7 +75,6 @@ Route::get('services/{slug}', [ serviceController::class,'frontSingleService'] )
 
 Route::post('get-free-case-evaluation', [ serviceController::class,'getFreeCaseEvaluation'] )
     ->name('front.get.free.case.evaluation');
-
 
 Route::group(['prefix'=>'admin','middleware'=>['auth']],function (){
     Route::get('dashboard', [ dashboardController::class,'index'] )
