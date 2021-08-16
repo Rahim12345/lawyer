@@ -63,7 +63,7 @@
                                 </div><!-- /.blog-one__image -->
                                 <div class="blog-one__content">
                                     <div class="blog-one__date"><span>{{ \Carbon\Carbon::parse($blog->updated_at)->format('d') }}</span>{{ explode(' ',\Carbon\Carbon::parse($blog->updated_at)->formatLocalized('%d %b %Y'))[1] }}</div><!-- /.blog-one__date -->
-                                    <div class="blog-one__meta">
+                                    <div class="blog-one__meta"> 
                                         <a href="javascript: void(0)">Sanan Suleymanli</a>
                                         <a href="javascript: void(0)" id="countComment"></a>
                                     </div><!-- /.blog-one__meta -->
