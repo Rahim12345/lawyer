@@ -303,14 +303,14 @@ class blogController extends Controller
             'blog_en'=>$request->blog_en
         ]);
 
-        $fields['include_player_ids'] = array_column(OneSignal::getDevices()['players'], 'id');
-        $fields['contents'] = array(
-            "en" => $request->title_en,
-        );
+$fields['include_player_ids'] = array_column(OneSignal::getDevices()['players'], 'id');
+$fields['contents'] = array(
+    "en" => $request->title_en,
+);
 
-        $fields['chrome_web_image'] = asset('storage/blog-covers/'.$new_name);
-        $fields['url'] = route('front.single.blog',str_slug($request->title_en));
-        OneSignal::sendPush($fields);
+$fields['chrome_web_image'] = asset('storage/blog-covers/'.$new_name);
+$fields['url'] = route('front.single.blog',str_slug($request->title_en));
+OneSignal::sendPush($fields);
     }
 
     public function myDelete($id)

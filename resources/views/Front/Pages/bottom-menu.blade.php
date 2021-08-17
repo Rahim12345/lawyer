@@ -1,8 +1,8 @@
 <nav class="mobile-bottom-nav h-2" style="line-height: 60px" id="mobile-nav">
     <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active col-2">
-        <div class="mobile-bottom-nav__item- bottom-menu">
-            <a href="{{ route('front.home') }}"><i class="text-light fa-2x fa fa-home"></i></a>
-        </div>
+{{--        <div class="mobile-bottom-nav__item- bottom-menu">--}}
+{{--            <a href="{{ route('front.home') }}"><i class="text-light fa-2x fa fa-home"></i></a>--}}
+{{--        </div>--}}
     </div>
     <div class="mobile-bottom-nav__item col-2">
         <div class="mobile-bottom-nav__item- bottom-menu">
