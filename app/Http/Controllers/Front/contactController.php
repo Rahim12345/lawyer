@@ -35,7 +35,7 @@ class contactController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/siteverify");
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('secret' => '6LfkLJ8bAAAAAP9JkRBotrWImFYJ80O22cjl-UZL', 'response' => $request->recaptcha_response)));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('secret' => env('RECAPTCHA_SITE_SECRET'), 'response' => $request->recaptcha_response)));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         curl_close($ch);
@@ -51,6 +51,8 @@ class contactController extends Controller
                 'message'=>$request->message,
                 'ip'=>\request()->ip()
             ]);
+
+            $this->sendNotification('Yeni contact mesajınız var');
 
             toastr()->success('Thanks for contacting us. We will contact you ASAP!','Success');
             return redirect()->route('front.contact');
@@ -96,5 +98,41 @@ class contactController extends Controller
                 ]
             ],422);
         }
+    }
+
+    public function sendNotification($message)
+    {
+        $content      = array(
+            "en" => $message
+        );
+
+        $fields = array(
+            'app_id' => env('ADMIN_ONE_SIGNAL_APP_ID'),
+            'included_segments' => array(
+                'Subscribed Users'
+            ),
+            'url'=>route('admin.notifications',['slug'=>'contact-notifications']),
+            'contents' => $content,
+        );
+
+        $fields = json_encode($fields);
+
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json; charset=utf-8',
+            'Authorization: Basic '.env('ADMIN_ONE_SIGNAL_AUTHORIZE')
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
     }
 }

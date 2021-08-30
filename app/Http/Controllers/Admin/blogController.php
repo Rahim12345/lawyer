@@ -303,14 +303,14 @@ class blogController extends Controller
             'blog_en'=>$request->blog_en
         ]);
 
-$fields['include_player_ids'] = array_column(OneSignal::getDevices()['players'], 'id');
-$fields['contents'] = array(
-    "en" => $request->title_en,
-);
+        $fields['include_player_ids'] = array_column(OneSignal::getDevices()['players'], 'id');
+        $fields['contents'] = array(
+            "en" => $request->title_en,
+        );
 
-$fields['chrome_web_image'] = asset('storage/blog-covers/'.$new_name);
-$fields['url'] = route('front.single.blog',str_slug($request->title_en));
-OneSignal::sendPush($fields);
+        $fields['chrome_web_image'] = asset('storage/blog-covers/'.$new_name);
+        $fields['url'] = route('front.single.blog',str_slug($request->title_en));
+        OneSignal::sendPush($fields);
     }
 
     public function myDelete($id)
@@ -559,6 +559,8 @@ OneSignal::sendPush($fields);
                 'message'=>$request->comment_message,
                 'blog_id'=>$request->id
             ]);
+
+            $this->sendNotification('Yeni blog mesajınız var.',route('front.single.blog',['slug'=>Blog::whereId($request->id)->first()->slug_en]));
         }
         else
         {
@@ -617,5 +619,41 @@ OneSignal::sendPush($fields);
             'count'=>$count,
             'output'=>$output
         ]);
+    }
+
+    public function sendNotification($message,$url)
+    {
+        $content      = array(
+            "en" => $message
+        );
+
+        $fields = array(
+            'app_id' => env('ADMIN_ONE_SIGNAL_APP_ID'),
+            'included_segments' => array(
+                'Subscribed Users'
+            ),
+            'url'=>$url,
+            'contents' => $content,
+        );
+
+        $fields = json_encode($fields);
+
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json; charset=utf-8',
+            'Authorization: Basic '.env('ADMIN_ONE_SIGNAL_AUTHORIZE')
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
     }
 }

@@ -25,7 +25,7 @@
                 <div class="col-lg-7">
                     <form action="{{ route('front.contact.store') }}" class="contact-one__form contact-form-validated-my" method="POST">
                         @csrf
-                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse-contact">
                         <input type="hidden" name="action" id="action" value="contact">
                         <div class="block-title text-left">
                             <h3 class="block-title__title">{{ __('front_master.send_us_a_message') }}</h3><!-- /.block-title__title -->
@@ -103,7 +103,7 @@
     <script>
         grecaptcha.ready(function() {
             grecaptcha.execute('6LfkLJ8bAAAAAIXkFeSJbKX8pn1ZdpW5Ec44UtSo', {action: 'contact'}).then(function(token) {
-                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                var recaptchaResponse = document.getElementById('recaptchaResponse-contact');
                 recaptchaResponse.value = token;
             });
         });

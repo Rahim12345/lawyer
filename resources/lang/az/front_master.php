@@ -16,7 +16,7 @@ return [
     'subject'=>'Mövzu',
     'message'=>'Mesaj',
     'send_message'=>'Mesaj göndər',
-    'most_successful_Law_firm'=>'Ən Uğurlu Hüquq Firması',
+    'most_successful_Law_firm'=>'Ən İddialı Hüquq Firması',
     'contact_us'=>'BİZİMLƏ ƏLAQƏ',
     'helpline'=>'Qaynar xətt',
     'phone'=>'Telefon',

@@ -16,7 +16,7 @@ return [
     'subject'=>'Subject',
     'message'=>'Message',
     'send_message'=>'Send Message',
-    'most_successful_Law_firm'=>'Most Successful Law Firm',
+    'most_successful_Law_firm'=>'Most Assertive Law Firm',
     'contact_us'=>'CONTACT US',
     'helpline'=>'Helpline',
     'phone'=>'Phone',

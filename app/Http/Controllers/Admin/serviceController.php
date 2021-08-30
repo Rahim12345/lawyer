@@ -48,10 +48,10 @@ class serviceController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:3072|dimensions:width=360,height=250',
             'service_name_az'=>'required|max:20',
             'service_name_en'=>'required|max:20',
-            'service_less_az'=>'required|max:130',
-            'service_less_en'=>'required|max:130',
-            'service_more_az'=>'required|max:5000',
-            'service_more_en'=>'required|max:5000',
+            'service_less_az'=>'required|max:190',
+            'service_less_en'=>'required|max:190',
+            'service_more_az'=>'required|max:20000',
+            'service_more_en'=>'required|max:20000',
         ],[],[
             'photo' =>'Cover (360x250)',
             'service_name_az'=>'Xidmətin adı(AZ)',
@@ -126,10 +126,10 @@ class serviceController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072|dimensions:width=360,height=250',
             'service_name_az'=>'required|max:20',
             'service_name_en'=>'required|max:20',
-            'service_less_az'=>'required|max:130',
-            'service_less_en'=>'required|max:130',
-            'service_more_az'=>'required|max:5000',
-            'service_more_en'=>'required|max:5000',
+            'service_less_az'=>'required|max:190',
+            'service_less_en'=>'required|max:190',
+            'service_more_az'=>'required|max:20000',
+            'service_more_en'=>'required|max:20000',
         ],[],[
             'photo' =>'Cover (360x250)',
             'service_name_az'=>'Xidmətin adı(AZ)',
@@ -284,5 +284,43 @@ class serviceController extends Controller
             'service_id'=>$request->appointment_service,
             'message'=>$request->appointment_message
         ]);
+
+        $this->sendNotification('Görüş üçün yeni mesajınız var');
+    }
+
+    public function sendNotification($message)
+    {
+        $content      = array(
+            "en" => $message
+        );
+
+        $fields = array(
+            'app_id' => env('ADMIN_ONE_SIGNAL_APP_ID'),
+            'included_segments' => array(
+                'Subscribed Users'
+            ),
+            'url'=>route('admin.notifications',['slug'=>'free-evaluation-notifications']),
+            'contents' => $content,
+        );
+
+        $fields = json_encode($fields);
+
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json; charset=utf-8',
+            'Authorization: Basic '.env('ADMIN_ONE_SIGNAL_AUTHORIZE')
+        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
     }
 }
