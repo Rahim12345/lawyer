@@ -17,7 +17,7 @@
                 <div class="container text-center">
                     <p class="slider-two__tag-line">{{ __('front_about.most_successful_law_firm') }}</p>
                     <!-- /.slider-two__tag-line -->
-                    <h2 class="slider-two__title">{{ __('front_service.effective_legal_solutions') }} </h2>
+                    <h2 class="slider-two__title">{{ __('front_service.effective_legal_solutions') }}</h2>
                     <!-- /.slider-two__title -->
                     <p class="slider-two__text">Eiusmod tempor incididunt ut labore et dolore magna aliqua <br> anim sed
                         minim veniam quis nostrud exercitation </p>
